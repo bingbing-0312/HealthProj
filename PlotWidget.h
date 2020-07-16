@@ -22,8 +22,8 @@ public:
     void paintEvent(QPaintEvent *event); //重绘重写函数
 
 private:
-    QList<double> data; //数据
-    QList<int> time; //数据
+    QList<int> data; //数据
+    QList<int> time; //数据对应时间
     QPainter *painter; //主painter
     QTimer timer; //重绘定时器
     QPixmap *pix;

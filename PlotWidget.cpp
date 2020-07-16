@@ -7,7 +7,7 @@ PlotWidget::PlotWidget(QWidget *parent,
     connect(&timer, &QTimer::timeout, this, &PlotWidget::paintSlot);
     timer.setInterval(updateInterval);
     painter = new QPainter;
-    pix = new QPixmap(this->width(), this->height());
+    pix = new QPixmap(1920, 600);
     pix->fill(Qt::black);
 }
 
@@ -19,9 +19,10 @@ PlotWidget::~PlotWidget()
 
 void PlotWidget::sendData(double d)
 {
-    data.append(d);
-    time.append(t);
-    timer.start(updateInterval);
+    data.append(pix->height() - (d-y0)*pix->height()/(yScale-y0));
+    time.append(t*pix->width()/xScale);
+    if(!timer.isActive())
+        timer.start(updateInterval);
 }
 
 void PlotWidget::paintEvent(QPaintEvent *event)
@@ -29,29 +30,29 @@ void PlotWidget::paintEvent(QPaintEvent *event)
     Q_UNUSED(event);
     paintData();
     painter->begin(this);
-    painter->drawPixmap(0, 0, pix->width(), pix->height(),*pix);
+    painter->drawPixmap(0, 0, this->width(), this->height(),*pix);
     painter->end();
 }
 
 void PlotWidget::paintData()
 {
-    int i;
-    xInterval = this->width()/xScale;
-    yInterval = this->height()/(yScale-y0);
+    int s = data.size()-1;
+    *pix = pix->scaled(this->width(), this->height());
     painter->begin(pix);
-    for(i=1;i<data.size();i++)
+    if(s>0)
     {
-        if(i==1){
-            painter->setPen(QPen(Qt::black, 10));
-            painter->drawLine(0, 0,
-                              0, this->height());
-        }
         painter->setPen(QPen(Qt::black, 10));
-        painter->drawLine((time.at(i))*xInterval, 0,
-                          (time.at(i))*xInterval, this->height());
+        painter->setBrush(Qt::black);
+        if(s>10)
+            painter->drawRect(time.at(s)+10, 0, 10, 600);
+        else
+            painter->drawRect(time.at(s), 0, 10, 600);
+    }
+    if(s>1)
+    {
         painter->setPen(QPen(color, 2));
-        painter->drawLine(time.at(i-1)*xInterval, this->height()-(data.at(i-1)-y0)*yInterval,
-                          time.at(i)*xInterval, this->height()-(data.at(i)-y0)*yInterval);
+        painter->drawLine(time.at(s-1), data.at(s-1),
+                          time.at(s), data.at(s));
     }
     painter->end();
 }

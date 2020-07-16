@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QtSerialPort/QSerialPort>
+#include <QDebug>
 #include "PlotWidget.h"
 
 class GetSerial : public QObject
@@ -10,10 +11,14 @@ class GetSerial : public QObject
     Q_OBJECT
 public:
     explicit GetSerial(QObject *parent = nullptr);
-    PlotWidget *pw;
+    QSerialPort *comPort = new QSerialPort(this);
+    QString alldata;
 
+public slots:
+    bool sendString();
+    void readMessage();
 signals:
-
+    void receivedData(QString nowdata);
 };
 
 #endif // GETSERIAL_H

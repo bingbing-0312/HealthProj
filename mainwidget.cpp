@@ -52,10 +52,28 @@ MainWidget::MainWidget(QWidget *parent)
 
     this->setLayout(splitTitle);
 
+    //测试区
     qsrand(time(0));
     tm = new QTimer;
     connect(tm, &QTimer::timeout, this, &MainWidget::testPlot);
-    tm->start(20);
+    tm->start(2);
+
+    //button1->setParent(this);
+    //button1->setGeometry(0,0,100,100);
+    //button1->setText("发送至串口");
+    //label1->setParent(this);
+    //label1->setGeometry(100,0,100,100);
+    //label1->setStyleSheet("background-color: rgb(255,255,255); color: rgb(0,0,0);");
+    //connect(button1, &QPushButton::clicked, getserial, &GetSerial::sendString);
+    //connect(getserial, &GetSerial::receivedData, this, &MainWidget::setLabelText);
+
+    iData = testData.begin();
+    //testWidget.setParent(this);
+    //testWidget.setGeometry(0,0,800,600);
+    ecgiiPlot.y0 = 1500;
+    ecgiiPlot.yScale = 3000;
+    ecgiiPlot.xScale = 4000;
+    ecgiiPlot.updateInterval = 1;
 }
 
 MainWidget::~MainWidget()
@@ -65,19 +83,10 @@ MainWidget::~MainWidget()
 
 void MainWidget::testPlot()
 {
-        if(i==30)
-        {
-            flag = 1;
-        }
-        if(i==10)
-        {
-            flag = 0;
-        }
-        ecgiiPlot.sendData(-20+i);
-        if(flag == 0)
-            i++;
-        else
-            i--;
+    ecgiiPlot.sendData(*iData);
+    if(iData == testData.end()-5)
+        iData = testData.begin();
+    iData++;
 }
 
 
