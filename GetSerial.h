@@ -3,7 +3,8 @@
 
 #include <QObject>
 #include <QtSerialPort/QSerialPort>
-#include <QDebug>
+#include <QtSerialPort/QSerialPortInfo>
+#include <QMessageBox>
 #include "PlotWidget.h"
 
 class GetSerial : public QObject
@@ -12,10 +13,12 @@ class GetSerial : public QObject
 public:
     explicit GetSerial(QObject *parent = nullptr);
     QSerialPort *comPort = new QSerialPort(this);
-    QString alldata;
+    QSerialPortInfo comsInfo;
+
+
 
 public slots:
-    bool sendString();
+    //bool sendString();
     void readMessage();
 signals:
     void receivedData(QString nowdata);

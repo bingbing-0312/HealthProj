@@ -5,6 +5,7 @@
 #include <QPainter>
 #include <QTimer>
 #include <QPixmap>
+#include <QLabel>
 
 class PlotWidget : public QWidget
 {
@@ -17,6 +18,7 @@ public:
     double y0 = -20; //y起始值
     double yScale = 20; //y最大值
     int updateInterval = 10; //采样间隔ms数，需符合奈奎斯特准则
+    QString text = "";
 
     void sendData(double d); //外部获取数据函数
     void paintEvent(QPaintEvent *event); //重绘重写函数
@@ -24,13 +26,12 @@ public:
 private:
     QList<int> data; //数据
     QList<int> time; //数据对应时间
+    QLabel label;
     QPainter *painter; //主painter
     QTimer timer; //重绘定时器
     QPixmap *pix;
 
     int t = 0; //当前时间
-    double xInterval; //时间轴坐标转换乘数
-    double yInterval; //y轴坐标转换乘数
     void paintData(); //绘制数据
 
 public slots:

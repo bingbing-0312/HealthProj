@@ -56,24 +56,17 @@ MainWidget::MainWidget(QWidget *parent)
     qsrand(time(0));
     tm = new QTimer;
     connect(tm, &QTimer::timeout, this, &MainWidget::testPlot);
-    tm->start(2);
-
-    //button1->setParent(this);
-    //button1->setGeometry(0,0,100,100);
-    //button1->setText("发送至串口");
-    //label1->setParent(this);
-    //label1->setGeometry(100,0,100,100);
-    //label1->setStyleSheet("background-color: rgb(255,255,255); color: rgb(0,0,0);");
-    //connect(button1, &QPushButton::clicked, getserial, &GetSerial::sendString);
-    //connect(getserial, &GetSerial::receivedData, this, &MainWidget::setLabelText);
+    tm->start(10);
 
     iData = testData.begin();
     //testWidget.setParent(this);
     //testWidget.setGeometry(0,0,800,600);
     ecgiiPlot.y0 = 1500;
     ecgiiPlot.yScale = 3000;
-    ecgiiPlot.xScale = 4000;
+    ecgiiPlot.xScale = 3000;
     ecgiiPlot.updateInterval = 1;
+    ecgiiPlot.color = Qt::green;
+    ecgiiPlot.text = "ECG";
 }
 
 MainWidget::~MainWidget()
@@ -84,9 +77,9 @@ MainWidget::~MainWidget()
 void MainWidget::testPlot()
 {
     ecgiiPlot.sendData(*iData);
-    if(iData == testData.end()-5)
+    iData+=10; //压缩，10点采样1次
+    if(iData >= testData.end())
         iData = testData.begin();
-    iData++;
 }
 
 

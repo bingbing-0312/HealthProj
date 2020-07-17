@@ -7,8 +7,11 @@ PlotWidget::PlotWidget(QWidget *parent,
     connect(&timer, &QTimer::timeout, this, &PlotWidget::paintSlot);
     timer.setInterval(updateInterval);
     painter = new QPainter;
-    pix = new QPixmap(1920, 600);
+    pix = new QPixmap(this->width(), this->height());
     pix->fill(Qt::black);
+    label.setParent(this);
+    label.move(0,0);
+    label.setStyleSheet("font: 10pt \"黑体\"; background-color: black; color: white");
 }
 
 PlotWidget::~PlotWidget()
@@ -39,15 +42,12 @@ void PlotWidget::paintData()
     int s = data.size()-1;
     *pix = pix->scaled(this->width(), this->height());
     painter->begin(pix);
-    if(s>0)
-    {
-        painter->setPen(QPen(Qt::black, 10));
-        painter->setBrush(Qt::black);
-        if(s>10)
-            painter->drawRect(time.at(s)+10, 0, 10, 600);
-        else
-            painter->drawRect(time.at(s), 0, 10, 600);
-    }
+    painter->setRenderHint(QPainter::Antialiasing,true);
+
+    painter->setPen(QPen(Qt::black, 1));
+    painter->setBrush(Qt::black);
+    painter->drawRect(time.at(s), 0, 10, this->height());
+
     if(s>1)
     {
         painter->setPen(QPen(color, 2));
@@ -60,6 +60,8 @@ void PlotWidget::paintData()
 void PlotWidget::paintSlot()
 {
     t += 1;
+    label.setText(text);
+    label.adjustSize();
     if(t==xScale)
     {
         t = 0;

@@ -5,7 +5,7 @@ GetSerial::GetSerial(QObject *parent) : QObject(parent)
     comPort->setPortName("COM31");
     if(!comPort->open(QIODevice::ReadWrite))
     {
-        qDebug() << "错误代码" << comPort->error();
+        QMessageBox::critical(NULL, "串口错误", "串口连接失败，错误代码"+QString::number(comPort->error()));
         return;
     }
     comPort->setBaudRate(QSerialPort::Baud115200);
@@ -16,18 +16,16 @@ GetSerial::GetSerial(QObject *parent) : QObject(parent)
     connect(comPort, &QSerialPort::readyRead, this, &GetSerial::readMessage);
 }
 
-bool GetSerial::sendString()
-{
-    const char* str = "A Qt Program sent this message to You ! \r\n";
-    if(comPort->write(str))
-        return true;
-    else
-        return false;
-}
+//bool GetSerial::sendString()
+//{
+//    const char* str = "A Qt Program sent this message to You ! \r\n";
+//    if(comPort->write(str))
+//        return true;
+//    else
+//        return false;
+//}
 
 void GetSerial::readMessage()
 {
-    QString nowdata = comPort->readAll();
-    alldata += nowdata;
-    emit receivedData(nowdata);
+    emit receivedData(comPort->readAll());
 }
