@@ -11,3 +11,6 @@
 
 ## 目标
 ![](https://cdn.jsdelivr.net/gh/huanghaozi/Storage4App@master/20200718/20200718115613b24d0116dee6d1759032094ced190ae5.jpg)
+
+## 目前完成情况
+![](https://cdn.jsdelivr.net/gh/huanghaozi/Storage4App@master/20200718/202007180912106a657d27ab5a367391900ed2d41e736d.jpg)
