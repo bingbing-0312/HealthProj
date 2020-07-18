@@ -2,7 +2,7 @@
 
 ## 窗口部件分工
 
- - :white_check_mark:黄灏：	整合、波形、串口
+ - :red_circle:黄灏：	整合、波形、串口
  - :red_circle:陈冰男：	HR、ST
  - :red_circle:杨洋：	NIBP
  - :red_circle:张明：	RESP、CO2
