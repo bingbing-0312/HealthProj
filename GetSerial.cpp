@@ -75,7 +75,7 @@ void GetSerial::statusMachine(char data)
                 status = 3;
             }
         }
-        else if(pkgType == 0x09 || tempData == 0x0a)
+        else if(pkgType == 0x09 || pkgType == 0x0a)
         {
             tempData = tempData | (pkgDataHead << 7);
             pkgData[0] = (tempData);
@@ -107,15 +107,15 @@ void GetSerial::statusMachine(char data)
             }
 
         }
-        else if(tempData == 0x09 || tempData == 0x0a) //SPO2&BP
+        else if(pkgType == 0x09 || pkgType == 0x0a) //SPO2&BP
         {
             pkgDataInt[0] = ((unsigned int)(pkgData[0] & 0xff));
-            if(((char)(pkgDataInt[0])) == tempData)
+            if(((char)(pkgDataInt[0] | 0x80)) == (char)tempData)
             {
                 dataForSending = pkgDataInt[0];
-                if(tempData == 0x09) //SPO2
+                if(pkgType == 0x09) //SPO2
                     emit receivedSPO2data(dataForSending);
-                if(tempData == 0x0a) //BP
+                if(pkgType == 0x0a) //BP
                     emit receivedBPdata(dataForSending);
             }
         }

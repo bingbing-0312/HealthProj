@@ -17,7 +17,7 @@ MainWidget::MainWidget(QWidget *parent)
     mainW->setStyleSheet("background-color: rgb(0,0,0)");
     ecgiiPlot.setStyleSheet("background-color: rgb(50,50,50)");
     spo2Plot.setStyleSheet("background-color: rgb(50,50,50)");
-    respPlot.setStyleSheet("background-color: rgb(50,50,50)");
+    bpPlot.setStyleSheet("background-color: rgb(50,50,50)");
     hr.setStyleSheet("background-color: rgb(50,50,50)");
     st.setStyleSheet("background-color: rgb(50,50,50)");
     nibp.setStyleSheet("background-color: rgb(50,50,50)");
@@ -34,7 +34,7 @@ MainWidget::MainWidget(QWidget *parent)
 
     leftPlotsLayout->addWidget(&ecgiiPlot);
     leftPlotsLayout->addWidget(&spo2Plot);
-    leftPlotsLayout->addWidget(&respPlot);
+    leftPlotsLayout->addWidget(&bpPlot);
     leftPlotsLayout->setMargin(0);
 
     rightGrids->addWidget(&hr,0, 0, 1, 1);
@@ -59,21 +59,23 @@ MainWidget::MainWidget(QWidget *parent)
     ecgiiPlot.updateInterval = 1;
     ecgiiPlot.color = Qt::green;
     ecgiiPlot.text = "ECG";
-    spo2Plot.y0 = 200;
 
-    spo2Plot.yScale = 3000;
-    spo2Plot.xScale = 1000;
-    spo2Plot.updateInterval = 5;
-    spo2Plot.color = Qt::green;
+    spo2Plot.y0 = 0;
+    spo2Plot.yScale = 300;
+    spo2Plot.xScale = 3000;
+    spo2Plot.updateInterval = 1;
+    spo2Plot.color = Qt::red;
     spo2Plot.text = "SPO2";
 
-    respPlot.y0 = 1000;
-    respPlot.yScale = 3000;
-    respPlot.xScale = 1000;
-    respPlot.updateInterval = 5;
-    respPlot.color = Qt::green;
-    respPlot.text = "RESP";
+    bpPlot.y0 = 0;
+    bpPlot.yScale = 300;
+    bpPlot.xScale = 3000;
+    bpPlot.updateInterval = 1;
+    bpPlot.color = Qt::yellow;
+    bpPlot.text = "BP";
     connect(gs, &GetSerial::receivedECGdata, &ecgiiPlot, &PlotWidget::sendData);
+    connect(gs, &GetSerial::receivedBPdata, &bpPlot, &PlotWidget::sendData);
+    connect(gs, &GetSerial::receivedSPO2data, &spo2Plot, &PlotWidget::sendData);
     gs->connectPort();
     //qsrand(time(0));
     //tm = new QTimer;

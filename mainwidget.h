@@ -44,12 +44,13 @@ public:
     TitleBar title;
     PlotWidget ecgiiPlot;
     PlotWidget spo2Plot;
-    PlotWidget respPlot;
+    PlotWidget bpPlot;
 
     HRWidget hr;
     STWidget st;
     NIBPWidget nibp;
     SPO2Widget spo2;
+
     TEMPWidget temp;
     RESPWidget resp;
     CO2Widget co2;
