@@ -4,7 +4,7 @@ MainWidget::MainWidget(QWidget *parent)
     : QWidget(parent)
 {
     //this->setWindowFlag(Qt::FramelessWindowHint);
-    this->resize(800, 600);
+    this->resize(1000, 600);
 
     title.setFixedHeight(50);
     title.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
