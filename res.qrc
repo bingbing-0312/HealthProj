@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/people.png</file>
+        <file>icons/cloud.png</file>
+        <file>icons/exclamation.png</file>
+        <file>icons/info.png</file>
+        <file>icons/scale.png</file>
+    </qresource>
+</RCC>
