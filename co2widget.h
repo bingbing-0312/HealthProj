@@ -2,12 +2,16 @@
 #define CO2WIDGET_H
 
 #include <QWidget>
+#include <QPainter>
+#include <QStyleOption>
+
 
 class CO2Widget : public QWidget
 {
     Q_OBJECT
 public:
     explicit CO2Widget(QWidget *parent = nullptr);
+    void paintEvent(QPaintEvent *event) override;
 
 signals:
 
