@@ -9,6 +9,15 @@
 #include <QLineEdit>
 #include "PlotWidget.h"
 #include "GetSerial.h"
+#include "titlebar.h"
+#include "hrwidget.h"
+#include "stwidget.h"
+#include "nibpwidget.h"
+#include "respwidget.h"
+#include "co2widget.h"
+#include "spo2widget.h"
+#include "tempwidget.h"
+
 
 class MainWidget : public QWidget
 {
@@ -32,18 +41,18 @@ public:
     QWidget *mainW = new QWidget(this);
 
     //待提升的Widget
-    QWidget title;
+    TitleBar title;
     PlotWidget ecgiiPlot;
     PlotWidget spo2Plot;
     PlotWidget respPlot;
 
-    QWidget hr;
-    QWidget st;
-    QWidget nibp;
-    QWidget spo2;
-    QWidget temp;
-    QWidget resp;
-    QWidget co2;
+    HRWidget hr;
+    STWidget st;
+    NIBPWidget nibp;
+    SPO2Widget spo2;
+    TEMPWidget temp;
+    RESPWidget resp;
+    CO2Widget co2;
 
     GetSerial *gs = new GetSerial("COM30");
 

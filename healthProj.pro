@@ -18,13 +18,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     GetSerial.cpp \
     PlotWidget.cpp \
+    co2widget.cpp \
+    hrwidget.cpp \
     main.cpp \
-    mainwidget.cpp
+    mainwidget.cpp \
+    nibpwidget.cpp \
+    respwidget.cpp \
+    spo2widget.cpp \
+    stwidget.cpp \
+    tempwidget.cpp \
+    titlebar.cpp
 
 HEADERS += \
     GetSerial.h \
     PlotWidget.h \
-    mainwidget.h
+    co2widget.h \
+    hrwidget.h \
+    mainwidget.h \
+    nibpwidget.h \
+    respwidget.h \
+    spo2widget.h \
+    stwidget.h \
+    tempwidget.h \
+    titlebar.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

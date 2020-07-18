@@ -55,7 +55,7 @@ MainWidget::MainWidget(QWidget *parent)
     //测试区
     ecgiiPlot.y0 = 0;
     ecgiiPlot.yScale = 4096;
-    ecgiiPlot.xScale = 2000;
+    ecgiiPlot.xScale = 3000;
     ecgiiPlot.updateInterval = 1;
     ecgiiPlot.color = Qt::green;
     ecgiiPlot.text = "ECG";
