@@ -5,6 +5,7 @@
 #include <QPainter>
 #include <QStyleOption>
 #include <QLabel>
+#include <QLayout>
 
 class TitleBar : public QWidget
 {
@@ -12,14 +13,23 @@ class TitleBar : public QWidget
 public:
     explicit TitleBar(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
 
 private:
-    QLabel *ptitleLabel1;
-    QLabel *ptitleLabel2;
-    QLabel *ptitleLabel3;
-    QLabel *ptitleLabel4;
-    QLabel *ptitleLabel5;
-    QLabel *ptitleLabel6;
+    QHBoxLayout *layout = new QHBoxLayout(this);
+
+    QLabel *deviceAndNote = new QLabel(this);
+    QLabel *peopleIcon = new QLabel(this);
+    QLabel *cloudIcon = new QLabel(this);
+    QLabel *exclamationIcon = new QLabel(this);
+    QLabel *peopleInfoIcon = new QLabel(this);
+    QLabel *scaleIcon = new QLabel(this);
+
+    QPixmap *peoplePNG = new QPixmap(":/icons/people.png");
+    QPixmap *exclamationPNG = new QPixmap(":/icons/exclamation.png");
+    QPixmap *scalePNG = new QPixmap(":/icons/scale.png");
+    QPixmap *cloudPNG = new QPixmap(":/icons/cloud.png");
+    QPixmap *infoPNG = new QPixmap(":/icons/info.png");
 signals:
 
 };
