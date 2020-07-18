@@ -20,8 +20,8 @@ public:
     int updateInterval = 10; //采样间隔ms数，需符合奈奎斯特准则
     QString text = "";
 
-    void sendData(double d); //外部获取数据函数
-    void paintEvent(QPaintEvent *event); //重绘重写函数
+    void paintEvent(QPaintEvent *event) override; //重写重绘函数
+    void resizeEvent(QResizeEvent *event) override;
 
 private:
     QList<int> data; //数据
@@ -35,6 +35,7 @@ private:
     void paintData(); //绘制数据
 
 public slots:
+    void sendData(double d); //外部获取数据函数
     void paintSlot(); //定时绘制
 
 };

@@ -6,14 +6,14 @@ MainWidget::MainWidget(QWidget *parent)
     //this->setWindowFlag(Qt::FramelessWindowHint);
     this->resize(800, 600);
 
-    title->setFixedHeight(50);
-    title->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    splitTitle->addWidget(title);
+    title.setFixedHeight(50);
+    title.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    splitTitle->addWidget(&title);
     splitTitle->addWidget(mainW);
     splitTitle->setMargin(0);
     splitTitle->setSpacing(0);
 
-    title->setStyleSheet("background-color: rgb(50,50,50)");
+    title.setStyleSheet("background-color: rgb(50,50,50)");
     mainW->setStyleSheet("background-color: rgb(0,0,0)");
     ecgiiPlot.setStyleSheet("background-color: rgb(50,50,50)");
     spo2Plot.setStyleSheet("background-color: rgb(50,50,50)");
@@ -53,20 +53,48 @@ MainWidget::MainWidget(QWidget *parent)
     this->setLayout(splitTitle);
 
     //测试区
-    qsrand(time(0));
-    tm = new QTimer;
-    connect(tm, &QTimer::timeout, this, &MainWidget::testPlot);
-    tm->start(10);
-
-    iData = testData.begin();
-    //testWidget.setParent(this);
-    //testWidget.setGeometry(0,0,800,600);
-    ecgiiPlot.y0 = 1500;
-    ecgiiPlot.yScale = 3000;
-    ecgiiPlot.xScale = 3000;
+    ecgiiPlot.y0 = 0;
+    ecgiiPlot.yScale = 4096;
+    ecgiiPlot.xScale = 2000;
     ecgiiPlot.updateInterval = 1;
     ecgiiPlot.color = Qt::green;
     ecgiiPlot.text = "ECG";
+    spo2Plot.y0 = 200;
+
+    spo2Plot.yScale = 3000;
+    spo2Plot.xScale = 1000;
+    spo2Plot.updateInterval = 5;
+    spo2Plot.color = Qt::green;
+    spo2Plot.text = "SPO2";
+
+    respPlot.y0 = 1000;
+    respPlot.yScale = 3000;
+    respPlot.xScale = 1000;
+    respPlot.updateInterval = 5;
+    respPlot.color = Qt::green;
+    respPlot.text = "RESP";
+    connect(gs, &GetSerial::receivedECGdata, &ecgiiPlot, &PlotWidget::sendData);
+    gs->connectPort();
+    //qsrand(time(0));
+    //tm = new QTimer;
+    //connect(tm, &QTimer::timeout, this, &MainWidget::testPlot);
+    //tm->start(10);
+    //
+    //iData = testData.begin();
+    //
+    //lineedit1->setParent(this);
+    //button1->setParent(this);
+    //label1->setParent(this);
+    //
+    //lineedit1->setGeometry(0, 100, 100, 20);
+    //button1->setGeometry(0, 120, 100, 30);
+    //button1->setText("发送");
+    //label1->setGeometry(100, 100, 100, 100);
+    //label1->setStyleSheet("background-color: white");
+    //connect(button1, &QPushButton::clicked, this, &MainWidget::sendString2Port);
+    //connect(getserial, &GetSerial::receivedData, this, &MainWidget::testRead);
+    //getserial->connectPort();
+
 }
 
 MainWidget::~MainWidget()
@@ -74,12 +102,24 @@ MainWidget::~MainWidget()
 
 }
 
-void MainWidget::testPlot()
-{
-    ecgiiPlot.sendData(*iData);
-    iData+=10; //压缩，10点采样1次
-    if(iData >= testData.end())
-        iData = testData.begin();
-}
+//void MainWidget::testPlot()
+//{
+//    ecgiiPlot.sendData(*iData);
+//    iData+=10; //压缩，10点采样1次
+//    if(iData >= testData.end())
+//        iData = testData.begin();
+//}
+//
+//void MainWidget::sendString2Port()
+//{
+//    QString txt4send = this->lineedit1->text()+"\r\n";
+//    if(!getserial->sendString(txt4send))
+//        QMessageBox::critical(NULL, "错误", "发送失败");
+//}
+//
+//void MainWidget::testRead(QString str)
+//{
+//    label1->setText(str);
+//}
 
 

@@ -30,6 +30,8 @@ void PlotWidget::sendData(double d)
 
 void PlotWidget::paintEvent(QPaintEvent *event)
 {
+    label.setText(text);
+    label.adjustSize();
     Q_UNUSED(event);
     paintData();
     painter->begin(this);
@@ -37,16 +39,25 @@ void PlotWidget::paintEvent(QPaintEvent *event)
     painter->end();
 }
 
+void PlotWidget::resizeEvent(QResizeEvent *event)
+{
+    Q_UNUSED(event);
+    *pix = pix->scaled(this->width(), this->height());
+}
+
 void PlotWidget::paintData()
 {
     int s = data.size()-1;
-    *pix = pix->scaled(this->width(), this->height());
     painter->begin(pix);
     painter->setRenderHint(QPainter::Antialiasing,true);
-
-    painter->setPen(QPen(Qt::black, 1));
-    painter->setBrush(Qt::black);
-    painter->drawRect(time.at(s), 0, 10, this->height());
+    if(s>-1)
+    {
+        painter->setPen(QPen(Qt::black, 1));
+        painter->setBrush(Qt::black);
+        if(s<10)
+            painter->drawRect(time.at(s), 0, 10, this->height());
+        painter->drawRect(time.at(s)+10, 0, 10, this->height());
+    }
 
     if(s>1)
     {
@@ -60,8 +71,6 @@ void PlotWidget::paintData()
 void PlotWidget::paintSlot()
 {
     t += 1;
-    label.setText(text);
-    label.adjustSize();
     if(t==xScale)
     {
         t = 0;
