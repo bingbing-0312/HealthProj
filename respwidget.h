@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QPainter>
 #include <QStyleOption>
+#include <QLayout>
+#include <QLabel>
 
 class RESPWidget : public QWidget
 {

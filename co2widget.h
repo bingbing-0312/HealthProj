@@ -4,6 +4,9 @@
 #include <QWidget>
 #include <QPainter>
 #include <QStyleOption>
+#include <QLayout>
+#include <QLabel>
+
 
 
 class CO2Widget : public QWidget

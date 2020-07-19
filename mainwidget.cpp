@@ -97,6 +97,8 @@ MainWidget::MainWidget(QWidget *parent)
     //connect(getserial, &GetSerial::receivedData, this, &MainWidget::testRead);
     //getserial->connectPort();
 
+
+
 }
 
 MainWidget::~MainWidget()
