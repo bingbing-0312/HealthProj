@@ -42,7 +42,7 @@ void PlotWidget::paintEvent(QPaintEvent *event)
 void PlotWidget::resizeEvent(QResizeEvent *event)
 {
     Q_UNUSED(event);
-    *pix = pix->scaled(this->width(), this->height());
+    *pix = pix->scaled(this->width(), this->height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 }
 
 void PlotWidget::paintData()

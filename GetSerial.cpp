@@ -92,12 +92,13 @@ void GetSerial::statusMachine(char data)
             if((char)(pkgDataInt[0]+pkgDataInt[1]+pkgDataInt[2]) == (tempData & 0x7f)) //校验
             {
                 dataForSending = (pkgDataInt[0]+pkgDataInt[1]+pkgDataInt[2])/3;
-                if(flagCount == false) //压缩
+                if(flagCount == 0) //压缩
                 {
                   emit receivedECGdata(dataForSending);
                   //qDebug()<<(pkgDataInt[0]+pkgDataInt[1]+pkgDataInt[2])/3;
+                  flagCount = 2;
                 }
-                flagCount = !flagCount;
+                flagCount --;
                 //flagCount++;
                 //if(flagCount==flagCountMax)
                 //    flagCount = 0;

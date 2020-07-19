@@ -2,41 +2,24 @@
 
 CO2Widget::CO2Widget(QWidget *parent) : QWidget(parent)
 {
-  this->setStyleSheet("background:rgb(0,0,0)");
-    //几个Layout
-    QVBoxLayout *layoutResp = new QVBoxLayout;
-    QHBoxLayout *layoutHead = new QHBoxLayout;
-    QHBoxLayout *layoutBody = new QHBoxLayout;
-    QHBoxLayout *layoutBottom = new QHBoxLayout;
-    //几个Wiget
-    QWidget *head = new QWidget;
+    this->setStyleSheet("background:rgb(0,0,0)");
+    head->setFixedHeight(30);
     head->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    QWidget *body = new QWidget;
-    QWidget *bottom = new QWidget;
-    //头部标签
-    QLabel *title = new QLabel;
-    QLabel *setting = new QLabel;
-    title->setStyleSheet("color:rgb(255, 255, 255);font: 11pt , Adobe 黑体 Std R;");
+    title->setStyleSheet("color:rgb(255, 255, 255);font: 11pt , SimHei;");
+
     //中部标签
-    QLabel *nothing1 = new QLabel;
-    QLabel *data = new QLabel;
-    QLabel *bpm = new QLabel;
-    data->setStyleSheet("color:yellow;font: 30pt , Adobe 黑体 Std R;");
-    bpm->setStyleSheet("color:yellow;font: 11pt , Adobe 黑体 Std R;");
+    data->setStyleSheet("color:yellow;font: 30pt , SimHei;");
+    bpm->setStyleSheet("color:yellow;font: 11pt , SimHei;");
     //尾部标签
     //QLabel *nothing2 = new QLabel;
-    QLabel *ins = new QLabel;
-    QLabel *awrr = new QLabel;
-    ins->setStyleSheet("color:yellow;font: 11pt , Adobe 黑体 Std R;");
-    awrr->setStyleSheet("color:yellow;font: 11pt , Adobe 黑体 Std R;");
+    ins->setStyleSheet("color:yellow;font: 11pt , SimHei;");
+    awrr->setStyleSheet("color:yellow;font: 11pt , SimHei;");
+
     //头部标签数据写入
-    QPixmap *pix = new QPixmap;
-    pix->load("setting.jpg");
     title->setText("CO2");
     setting->setPixmap(*pix);
 
     //中部标签数据写入
-    nothing1->setText("     ");
     data->setText("-?-");
     bpm->setText("mmHg");
 
@@ -50,12 +33,10 @@ CO2Widget::CO2Widget(QWidget *parent) : QWidget(parent)
     head->setStyleSheet("background-color:rgb(75, 75, 75)");
     head->setLayout(layoutHead);
     //中部布局
-    layoutBody->addWidget(nothing1);
+    layoutBody->addSpacerItem(new QSpacerItem(1,1, QSizePolicy::Expanding));
     layoutBody->addWidget(data, 0, Qt::AlignCenter|Qt::AlignBottom);
+    layoutBody->addSpacerItem(new QSpacerItem(1,1, QSizePolicy::Expanding));
     layoutBody->addWidget(bpm ,0 ,Qt::AlignRight | Qt::AlignTop);
-//    layoutBody->setStretch(1, 3);
-//    layoutBody->setStretch(2, 4);
-//    layoutBody->setStretch(3, 3);
     body->setLayout(layoutBody);
     //尾部布局
     layoutBottom->addWidget(ins, 0, Qt::AlignCenter|Qt::AlignTop);
@@ -66,6 +47,8 @@ CO2Widget::CO2Widget(QWidget *parent) : QWidget(parent)
     layoutResp->addWidget(head,0, Qt::AlignTop);
     layoutResp->addWidget(body, 0,Qt::AlignTop);
     layoutResp->addWidget(bottom, 0, Qt::AlignTop);
+    layoutResp->setMargin(0);
+    layoutResp->setSpacing(0);
     this->setLayout(layoutResp);
 }
 
@@ -76,4 +59,11 @@ void CO2Widget::paintEvent(QPaintEvent *event)
     opt.init(this);
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+}
+
+void CO2Widget::resizeEvent(QResizeEvent *event)
+{
+    Q_UNUSED(event);
+    *pix = pix->scaledToHeight(head->height()-18, Qt::SmoothTransformation);
+    setting->setPixmap(*pix);
 }
