@@ -45,6 +45,12 @@ MainWidget::MainWidget(QWidget *parent)
     rightGrids->addWidget(&resp,3, 0, 1, 1);
     rightGrids->addWidget(&co2,3, 1, 1, 1);
     rightGrids->setMargin(0);
+    rightGrids->setRowStretch(0, 1);
+    rightGrids->setRowStretch(1, 1);
+    rightGrids->setRowStretch(2, 1);
+    rightGrids->setRowStretch(3, 1);
+    rightGrids->setColumnStretch(0, 1);
+    rightGrids->setColumnStretch(1, 1);
 
     left->setLayout(leftPlotsLayout);
     right->setLayout(rightGrids);
@@ -55,21 +61,21 @@ MainWidget::MainWidget(QWidget *parent)
     //测试区
     ecgiiPlot.y0 = 0;
     ecgiiPlot.yScale = 4096;
-    ecgiiPlot.xScale = 3000;
+    ecgiiPlot.xScale = 2000;
     ecgiiPlot.updateInterval = 1;
     ecgiiPlot.color = Qt::green;
     ecgiiPlot.text = "ECG";
 
     spo2Plot.y0 = 0;
     spo2Plot.yScale = 300;
-    spo2Plot.xScale = 3000;
+    spo2Plot.xScale = 2000;
     spo2Plot.updateInterval = 1;
     spo2Plot.color = Qt::red;
     spo2Plot.text = "SPO2";
 
     bpPlot.y0 = 0;
     bpPlot.yScale = 300;
-    bpPlot.xScale = 3000;
+    bpPlot.xScale = 2000;
     bpPlot.updateInterval = 1;
     bpPlot.color = Qt::yellow;
     bpPlot.text = "BP";

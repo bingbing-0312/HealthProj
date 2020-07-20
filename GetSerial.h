@@ -28,7 +28,7 @@ private:
     int pkgDataInt[3];
     unsigned int dataForSending;
 
-    bool flagCount = true;
+    int flagCount = 2;
 
 public slots:
     //bool sendString(QString str);
