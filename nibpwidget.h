@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QTime>
 #include <QLabel>
+#include <QLayout>
 
 class NIBPWidget : public QWidget
 {
@@ -14,17 +15,36 @@ class NIBPWidget : public QWidget
 public:
     explicit NIBPWidget(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event) override;
-//    void resizeEvent(QResizeEvent *event) override;
-//    QLabel *LCDClock = new QLabel;
+    void resizeEvent(QResizeEvent *event) override;
+    QVBoxLayout *playoutWhole = new QVBoxLayout;
+    QVBoxLayout *playoutRight = new QVBoxLayout;
+    QVBoxLayout *playoutmiddle =new QVBoxLayout;
+    QHBoxLayout *playoutBody = new QHBoxLayout;
+    QHBoxLayout *playoutHead = new QHBoxLayout;
+
+    QWidget *wholehead = new QWidget;
+    QWidget *wholebody = new QWidget;
+    QWidget *bodymiddle = new QWidget;
+    QWidget *bodyright = new QWidget;
+
+    QLabel *title = new QLabel;
+    QLabel *setting = new QLabel;
+    QLabel *righttop = new QLabel;
+    QLabel *rightmiddle = new QLabel;
+    QLabel *rightbottom = new QLabel;
+    QLabel *middlemiddle = new QLabel;
+    QLabel *bodyleft = new QLabel;
+
     QTimer timer;
     QString timeStr;
+    QPixmap *pix = new QPixmap(":/icons/settings.png");
 
 
 public slots:
-//    void setLCDTime();
+    void setLCDTime();
 
 private:
-    QLabel *pCurrentTimeLabel;
+    QLabel *pCurrentTimeLabel = new QLabel(this);
     QTime time;
 
 signals:
