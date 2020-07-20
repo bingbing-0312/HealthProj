@@ -33,6 +33,7 @@ public:
     QLabel *rightmiddle = new QLabel;
     QLabel *rightbottom = new QLabel;
     QLabel *middlemiddle = new QLabel;
+    QLabel *middlebottom = new QLabel;
     QLabel *bodyleft = new QLabel;
 
     QTimer timer;
