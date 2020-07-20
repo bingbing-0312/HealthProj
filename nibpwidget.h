@@ -8,6 +8,7 @@
 #include <QTime>
 #include <QLabel>
 #include <QLayout>
+#include <QDebug>
 
 class NIBPWidget : public QWidget
 {
@@ -17,6 +18,7 @@ public:
     void paintEvent(QPaintEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
     QVBoxLayout *playoutWhole = new QVBoxLayout;
+    QVBoxLayout *playoutLeft = new QVBoxLayout;
     QVBoxLayout *playoutRight = new QVBoxLayout;
     QVBoxLayout *playoutmiddle =new QVBoxLayout;
     QHBoxLayout *playoutBody = new QHBoxLayout;
@@ -26,6 +28,7 @@ public:
     QWidget *wholebody = new QWidget;
     QWidget *bodymiddle = new QWidget;
     QWidget *bodyright = new QWidget;
+    QWidget *bodyLeft = new QWidget;
 
     QLabel *title = new QLabel;
     QLabel *setting = new QLabel;
@@ -33,7 +36,8 @@ public:
     QLabel *rightmiddle = new QLabel;
     QLabel *rightbottom = new QLabel;
     QLabel *middlemiddle = new QLabel;
-    QLabel *bodyleft = new QLabel;
+    QLabel *bodyleftLabel = new QLabel;
+    QLabel *bodyleftUp = new QLabel;
 
     QTimer timer;
     QString timeStr;

@@ -6,9 +6,7 @@ RESPWidget::RESPWidget(QWidget *parent) : QWidget(parent)
     head->setStyleSheet("background-color:rgb(75, 75, 75)");
     head->setFixedHeight(30);
     head->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    title->setStyleSheet("color:rgb(255, 255, 255);font: 11pt , SimHei;");
-    data->setStyleSheet("color:yellow;font: 36pt , SimHei;");
-    bpm->setStyleSheet("color:yellow;font: 11pt , SimHei;");
+    title->setStyleSheet("color:white;font: 11pt , SimHei;");
 
     //头部标签数据写入
     title->setText("RESP");
@@ -52,6 +50,12 @@ void RESPWidget::paintEvent(QPaintEvent *event)
     opt.init(this);
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+    int h = this->height();
+    int px15 = h*15/128;
+    int px40 = h*40/128;
+    data->setStyleSheet(QString("color:yellow;font: %1px , SimHei;").arg(px40));
+    bpm->setStyleSheet(QString("color:yellow;font: %1px , SimHei;").arg(px15));
+
 }
 
 void RESPWidget::resizeEvent(QResizeEvent *event)
