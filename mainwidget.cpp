@@ -11,31 +11,33 @@ MainWidget::MainWidget(QWidget *parent)
     splitTitle->addWidget(&title);
     splitTitle->addWidget(mainW);
     splitTitle->setMargin(0);
-    splitTitle->setSpacing(0);
+    splitTitle->setSpacing(1);
 
-    title.setStyleSheet("background-color: rgb(50,50,50)");
-    mainW->setStyleSheet("background-color: rgb(0,0,0)");
-    ecgiiPlot.setStyleSheet("background-color: rgb(50,50,50)");
-    spo2Plot.setStyleSheet("background-color: rgb(50,50,50)");
-    bpPlot.setStyleSheet("background-color: rgb(50,50,50)");
-    hr.setStyleSheet("background-color: rgb(50,50,50)");
-    st.setStyleSheet("background-color: rgb(50,50,50)");
-    nibp.setStyleSheet("background-color: rgb(50,50,50)");
-    spo2.setStyleSheet("background-color: rgb(50,50,50)");
-    temp.setStyleSheet("background-color: rgb(50,50,50)");
-    resp.setStyleSheet("background-color: rgb(50,50,50)");
-    co2.setStyleSheet("background-color: rgb(50,50,50)");
+    title.setStyleSheet("background-color: rgb(47, 53, 66)");
+    mainW->setStyleSheet("background-color: white");
+    ecgiiPlot.setStyleSheet("background-color: rgb(47, 53, 66)");
+    spo2Plot.setStyleSheet("background-color: rgb(47, 53, 66)");
+    bpPlot.setStyleSheet("background-color: rgb(47, 53, 66)");
+    hr.setStyleSheet("background-color: rgb(47, 53, 66)");
+    st.setStyleSheet("background-color: rgb(47, 53, 66)");
+    nibp.setStyleSheet("background-color: rgb(47, 53, 66)");
+    spo2.setStyleSheet("background-color: rgb(47, 53, 66)");
+    temp.setStyleSheet("background-color: rgb(47, 53, 66)");
+    resp.setStyleSheet("background-color: rgb(47, 53, 66)");
+    co2.setStyleSheet("background-color: rgb(47, 53, 66)");
 
     leftrightLayout->addWidget(left);
     leftrightLayout->addWidget(right);
     leftrightLayout->setStretch(0, 2);
     leftrightLayout->setStretch(1, 1);
     leftrightLayout->setMargin(0);
+    leftrightLayout->setSpacing(1);
 
     leftPlotsLayout->addWidget(&ecgiiPlot);
     leftPlotsLayout->addWidget(&spo2Plot);
     leftPlotsLayout->addWidget(&bpPlot);
     leftPlotsLayout->setMargin(0);
+    leftPlotsLayout->setSpacing(1);
 
     rightGrids->addWidget(&hr,0, 0, 1, 1);
     rightGrids->addWidget(&st,0, 1, 1, 1);
@@ -45,12 +47,13 @@ MainWidget::MainWidget(QWidget *parent)
     rightGrids->addWidget(&resp,3, 0, 1, 1);
     rightGrids->addWidget(&co2,3, 1, 1, 1);
     rightGrids->setMargin(0);
+    rightGrids->setSpacing(1);
     rightGrids->setRowStretch(0, 1);
     rightGrids->setRowStretch(1, 1);
     rightGrids->setRowStretch(2, 1);
     rightGrids->setRowStretch(3, 1);
-    rightGrids->setColumnStretch(0, 1);
     rightGrids->setColumnStretch(1, 1);
+    rightGrids->setColumnStretch(0, 1);
 
     left->setLayout(leftPlotsLayout);
     right->setLayout(rightGrids);
@@ -61,21 +64,21 @@ MainWidget::MainWidget(QWidget *parent)
     //测试区
     ecgiiPlot.y0 = 0;
     ecgiiPlot.yScale = 4096;
-    ecgiiPlot.xScale = 2000;
+    ecgiiPlot.xScale = 1500;
     ecgiiPlot.updateInterval = 1;
     ecgiiPlot.color = Qt::green;
     ecgiiPlot.text = "ECG";
 
     spo2Plot.y0 = 0;
     spo2Plot.yScale = 300;
-    spo2Plot.xScale = 2000;
+    spo2Plot.xScale = 1500;
     spo2Plot.updateInterval = 1;
     spo2Plot.color = Qt::red;
     spo2Plot.text = "SPO2";
 
     bpPlot.y0 = 0;
     bpPlot.yScale = 300;
-    bpPlot.xScale = 2000;
+    bpPlot.xScale = 1500;
     bpPlot.updateInterval = 1;
     bpPlot.color = Qt::yellow;
     bpPlot.text = "BP";

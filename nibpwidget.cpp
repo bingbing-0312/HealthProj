@@ -9,9 +9,12 @@ NIBPWidget::NIBPWidget(QWidget *parent) : QWidget(parent)
     wholehead->setFixedHeight(30);
     wholehead->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     wholehead->setLayout(playoutHead);
-    playoutBody->addWidget(bodyleft,1, Qt::AlignCenter);
+    playoutBody->addWidget(bodyLeft,1);
     playoutBody->addWidget(bodymiddle,1);
     playoutBody->addWidget(bodyright,1);
+    playoutLeft->addWidget(bodyleftUp, 0);
+    playoutLeft->addWidget(bodyleftLabel, 1, Qt::AlignCenter);
+    bodyLeft->setLayout(playoutLeft);
     playoutmiddle->addWidget(pCurrentTimeLabel,0, Qt::AlignHCenter|Qt::AlignTop);
     playoutmiddle->addWidget(middlemiddle,1, Qt::AlignCenter);
     bodymiddle->setLayout(playoutmiddle);
@@ -22,37 +25,44 @@ NIBPWidget::NIBPWidget(QWidget *parent) : QWidget(parent)
     playoutWhole->addWidget(wholehead,0);
     playoutWhole->addWidget(wholebody,1);
     playoutWhole->setMargin(0);
+    playoutLeft->setMargin(0);
     playoutRight->setMargin(0);
     playoutmiddle->setMargin(0);
     playoutBody->setMargin(0);
     this->setLayout(playoutWhole);
 
-    title->setStyleSheet("color:rgb(255, 255, 255); font: 11pt , Adobe 黑体 Std R;");
-    pCurrentTimeLabel->setStyleSheet("color: rgb(255, 255, 255);font: 10pt Adobe 黑体 Std R;");
-    wholehead->setStyleSheet("background-color:rgb(75, 75, 75)");
-    bodyleft->setStyleSheet("color: rgb(7, 135, 255); font: 14pt , Adobe 黑体 Std R");
-    middlemiddle->setStyleSheet("color: rgb(7, 135, 255); font: 30pt , Adobe 黑体 Std R");
-    righttop->setStyleSheet("color: rgb(7, 135, 255); font: 11pt , Adobe 黑体 Std R");
-    rightmiddle->setStyleSheet("color: rgb(7, 135, 255); font: 30pt , Adobe 黑体 Std R");
+    title->setStyleSheet("color:rgb(255, 255, 255); font: 15px , SimHei;");
+    wholehead->setStyleSheet("background-color:rgb(87, 96, 111)");
 
     time = QTime::currentTime();
     timer.start(50);
     pCurrentTimeLabel->setText(time.toString("hh:mm:ss"));
     setting->setPixmap(*pix);
     title->setText("NIBP");
-    bodyleft->setText("-?-");
+    bodyleftLabel->setText("-?-");
     middlemiddle->setText("/ -?-");
     righttop->setText("mmHg");
     rightmiddle->setText("-?-");
     connect(&timer, &QTimer::timeout, this, &NIBPWidget::setLCDTime);
 }
 
-
 void NIBPWidget::resizeEvent(QResizeEvent *event)
 {
     Q_UNUSED(event);
     *pix = pix->scaledToHeight(wholehead->height() - 18, Qt::SmoothTransformation);
     setting->setPixmap(*pix);
+    int w = this->width();
+    int h = this->height();
+    int px12 = w*12/256 > h*12/128? h*12/128 : w*12/256;
+    int px25 = w*25/256 > h*25/128? h*25/128 : w*25/256;
+    int px40 = w*40/256 > h*40/128? h*40/128 : w*40/256;
+
+    pCurrentTimeLabel->setStyleSheet(QString("color: rgb(112, 161, 255);font: %1px, SimHei;").arg(px12));
+    bodyleftUp->setStyleSheet(QString("color: rgb(112, 161, 255);font: %1px, SimHei;").arg(px12));
+    bodyleftLabel->setStyleSheet(QString("color: rgb(112, 161, 255);font: %1px, SimHei;").arg(px25));
+    middlemiddle->setStyleSheet(QString("color: rgb(112, 161, 255);font: %1px, SimHei;").arg(px40));
+    righttop->setStyleSheet(QString("color: rgb(112, 161, 255);font: %1px, SimHei;").arg(px12));
+    rightmiddle->setStyleSheet(QString("color: rgb(112, 161, 255);font: %1px, SimHei;").arg(px40));
 }
 
 void NIBPWidget::setLCDTime()
