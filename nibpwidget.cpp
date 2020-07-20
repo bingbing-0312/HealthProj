@@ -54,15 +54,15 @@ void NIBPWidget::resizeEvent(QResizeEvent *event)
     setting->setPixmap(*pix);
     int w = this->width();
     int h = this->height();
-    int px15 = w*15/217 > h*15/104? h*15/104 : w*15/217;
-    int px25 = w*25/217 > h*25/104? h*25/104 : w*25/217;
-    int px40 = w*40/217 > h*40/104? h*40/104 : w*40/217;
+    int px12 = w*12/256 > h*12/128? h*12/128 : w*12/256;
+    int px25 = w*25/256 > h*25/128? h*25/128 : w*25/256;
+    int px40 = w*40/256 > h*40/128? h*40/128 : w*40/256;
 
-    pCurrentTimeLabel->setStyleSheet(QString("color: blue;font: %1px, SimHei;").arg(px15));
-    bodyleftUp->setStyleSheet(QString("color: blue;font: %1px, SimHei;").arg(px15));
+    pCurrentTimeLabel->setStyleSheet(QString("color: blue;font: %1px, SimHei;").arg(px12));
+    bodyleftUp->setStyleSheet(QString("color: blue;font: %1px, SimHei;").arg(px12));
     bodyleftLabel->setStyleSheet(QString("color: blue;font: %1px, SimHei;").arg(px25));
     middlemiddle->setStyleSheet(QString("color: blue;font: %1px, SimHei;").arg(px40));
-    righttop->setStyleSheet(QString("color: blue;font: %1px, SimHei;").arg(px15));
+    righttop->setStyleSheet(QString("color: blue;font: %1px, SimHei;").arg(px12));
     rightmiddle->setStyleSheet(QString("color: blue;font: %1px, SimHei;").arg(px40));
 }
 

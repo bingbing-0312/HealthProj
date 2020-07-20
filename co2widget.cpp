@@ -54,12 +54,12 @@ void CO2Widget::paintEvent(QPaintEvent *event)
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
     int h = this->height();
     int px15 = h*15/128;
-    int px25 = h*25/128;
+    //int px25 = h*25/128;
     int px40 = h*40/128;
     data->setStyleSheet(QString("color:yellow;font: %1px , SimHei;").arg(px40));
     bpm->setStyleSheet(QString("color:yellow;font: %1px , SimHei;").arg(px15));
-    ins->setStyleSheet(QString("color:yellow;font: %1px , SimHei;").arg(px25));
-    awrr->setStyleSheet(QString("color:yellow;font: %1px , SimHei;").arg(px25));
+    ins->setStyleSheet(QString("color:yellow;font: %1px , SimHei;").arg(px15));
+    awrr->setStyleSheet(QString("color:yellow;font: %1px , SimHei;").arg(px15));
 }
 
 void CO2Widget::resizeEvent(QResizeEvent *event)
