@@ -4,6 +4,9 @@
 #include <QWidget>
 #include <QPainter>
 #include <QStyleOption>
+#include <QLayout>
+#include <QLabel>
+#include <QPixmap>
 
 class TEMPWidget : public QWidget
 {
@@ -11,6 +14,28 @@ class TEMPWidget : public QWidget
 public:
     explicit TEMPWidget(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
+
+private:
+
+    QVBoxLayout *layout=new QVBoxLayout;
+    QVBoxLayout *layoutBody=new QVBoxLayout;
+    QHBoxLayout *layoutHead=new QHBoxLayout;
+    QHBoxLayout *layoutBody2=new QHBoxLayout;
+    QHBoxLayout *layoutBody1=new QHBoxLayout;
+
+    QWidget *head=new QWidget;
+    QWidget *body=new QWidget;
+    QWidget *z1=new QWidget;
+    QWidget *z2=new QWidget;
+    QLabel *t1=new QLabel;
+    QLabel *t2=new QLabel;
+    QLabel *td=new QLabel;
+    QLabel *c=new QLabel;
+    QLabel *nothing=new QLabel;
+    QLabel *title=new QLabel;
+    QLabel *tu=new QLabel;
+    QPixmap *pix = new QPixmap(":/icons/settings.png");
 
 signals:
 

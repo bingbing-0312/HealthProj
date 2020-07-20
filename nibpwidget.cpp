@@ -32,7 +32,7 @@ NIBPWidget::NIBPWidget(QWidget *parent) : QWidget(parent)
     this->setLayout(playoutWhole);
 
     title->setStyleSheet("color:rgb(255, 255, 255); font: 15px , SimHei;");
-    wholehead->setStyleSheet("background-color:rgb(75, 75, 75)");
+    wholehead->setStyleSheet("background-color:rgb(87, 96, 111)");
 
     time = QTime::currentTime();
     timer.start(50);
@@ -46,7 +46,6 @@ NIBPWidget::NIBPWidget(QWidget *parent) : QWidget(parent)
     connect(&timer, &QTimer::timeout, this, &NIBPWidget::setLCDTime);
 }
 
-
 void NIBPWidget::resizeEvent(QResizeEvent *event)
 {
     Q_UNUSED(event);
@@ -58,12 +57,12 @@ void NIBPWidget::resizeEvent(QResizeEvent *event)
     int px25 = w*25/256 > h*25/128? h*25/128 : w*25/256;
     int px40 = w*40/256 > h*40/128? h*40/128 : w*40/256;
 
-    pCurrentTimeLabel->setStyleSheet(QString("color: blue;font: %1px, SimHei;").arg(px12));
-    bodyleftUp->setStyleSheet(QString("color: blue;font: %1px, SimHei;").arg(px12));
-    bodyleftLabel->setStyleSheet(QString("color: blue;font: %1px, SimHei;").arg(px25));
-    middlemiddle->setStyleSheet(QString("color: blue;font: %1px, SimHei;").arg(px40));
-    righttop->setStyleSheet(QString("color: blue;font: %1px, SimHei;").arg(px12));
-    rightmiddle->setStyleSheet(QString("color: blue;font: %1px, SimHei;").arg(px40));
+    pCurrentTimeLabel->setStyleSheet(QString("color: rgb(112, 161, 255);font: %1px, SimHei;").arg(px12));
+    bodyleftUp->setStyleSheet(QString("color: rgb(112, 161, 255);font: %1px, SimHei;").arg(px12));
+    bodyleftLabel->setStyleSheet(QString("color: rgb(112, 161, 255);font: %1px, SimHei;").arg(px25));
+    middlemiddle->setStyleSheet(QString("color: rgb(112, 161, 255);font: %1px, SimHei;").arg(px40));
+    righttop->setStyleSheet(QString("color: rgb(112, 161, 255);font: %1px, SimHei;").arg(px12));
+    rightmiddle->setStyleSheet(QString("color: rgb(112, 161, 255);font: %1px, SimHei;").arg(px40));
 }
 
 void NIBPWidget::setLCDTime()

@@ -1,11 +1,24 @@
 #include "hrwidget.h"
-#include<QLabel>
-#include<QVBoxLayout>
-#include<QHBoxLayout>
-#include<QPixmap>
 HRWidget::HRWidget(QWidget *parent) : QWidget(parent)
 {
+    title->setText("HR");
+    data->setText("80");
+    bpm->setText("bpm");
+    title->setStyleSheet("color:white; font: 11pt, SimHei");
+    titlebar->setStyleSheet("background-color:rgb(87, 96, 111);");
 
+    titlebar->setFixedHeight(30);
+    titlebarLayout->addWidget(title, 0, Qt::AlignLeft);
+    titlebarLayout->addWidget(pixContainer, 0, Qt::AlignRight);
+    titlebar->setLayout(titlebarLayout);
+
+    hrlayout->addWidget(titlebar);
+    hrlayout->addWidget(bpm,0,Qt::AlignRight|Qt::AlignTop);
+    hrlayout->addWidget(data,1,Qt::AlignCenter);
+    hrlayout->addWidget(bpm2nothing,0,Qt::AlignRight|Qt::AlignTop);
+    hrlayout->setMargin(0);
+    hrlayout->setSpacing(0);
+    this->setLayout(hrlayout);
 }
 
 void HRWidget::paintEvent(QPaintEvent *event)
@@ -15,39 +28,17 @@ void HRWidget::paintEvent(QPaintEvent *event)
     opt.init(this);
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+}
 
-    hrl1->setText("80");
-    hrl1->setStyleSheet("background-color:rgb(0,255,0);");
-    hrl2->setText("bpm");
-    hrl2->setStyleSheet("background-color:rgb(0,255,0);");
-
-
-    //创建窗口对象，初始化
-    QWidget *hrleftWidget =new QWidget;
-    hrleftWidget->setStyleSheet("background-color:rgb(255,0,0);");
-
-
-    //创建布局器
-    QVBoxLayout *hrlayout =new QVBoxLayout;
-
-    //将窗口添加到布局器中
-    hrlayout->addWidget(hrleftWidget);
-
-    //80与bpm的位置
-    hrlayout->addWidget(hrleftWidget);
-    hrlayout->addWidget(hrl1,0,Qt::AlignCenter);
-    hrlayout->addWidget(hrl2,0,Qt::AlignRight|Qt::AlignTop);
-
-    hrleftWidget->setLayout(hrlayout);
-
-
-
-
-
-
-
-
-
-
-
+void HRWidget::resizeEvent(QResizeEvent *event)
+{
+    Q_UNUSED(event);
+    *pix = pix->scaledToHeight(titlebar->height()-18);
+    pixContainer->setPixmap(*pix);
+    int w = this->width(), h = this->height();
+    int px15 = w*15/128 > h*15/128? h*15/128 : w*15/128;
+    int px50 = w*50/128 > h*50/128? h*50/128 : w*50/128;
+    data->setStyleSheet(QString("color:rgb(123, 237, 159); font: %1px, SimHei").arg(px50));
+    bpm->setStyleSheet(QString("color:rgb(123, 237, 159); font: %1px, SimHei").arg(px15));
+    bpm2nothing->setStyleSheet(QString("color:rgb(123, 237, 159); font: %1px, SimHei").arg(px15));
 }

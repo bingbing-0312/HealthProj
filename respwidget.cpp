@@ -3,7 +3,7 @@
 RESPWidget::RESPWidget(QWidget *parent) : QWidget(parent)
 {
     this->setStyleSheet("background:rgb(0,0,0)");
-    head->setStyleSheet("background-color:rgb(75, 75, 75)");
+    head->setStyleSheet("background-color:rgb(87, 96, 111)");
     head->setFixedHeight(30);
     head->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     title->setStyleSheet("color:white;font: 11pt , SimHei;");
@@ -55,8 +55,8 @@ void RESPWidget::paintEvent(QPaintEvent *event)
     int h = this->height();
     int px15 = h*15/128 > w*15/128? w*15/128:h*15/128;
     int px40 = h*40/128 > w*40/128? w*40/128:h*40/128;
-    data->setStyleSheet(QString("color:yellow;font: %1px , SimHei;").arg(px40));
-    bpm->setStyleSheet(QString("color:yellow;font: %1px , SimHei;").arg(px15));
+    data->setStyleSheet(QString("color:rgb(236, 204, 104);font: %1px , SimHei;").arg(px40));
+    bpm->setStyleSheet(QString("color:rgb(236, 204, 104);font: %1px , SimHei;").arg(px15));
 
 }
 

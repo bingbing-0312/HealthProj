@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QPainter>
 #include <QStyleOption>
+#include <QLayout>
+#include <QLabel>
 
 class SPO2Widget : public QWidget
 {
@@ -11,7 +13,23 @@ class SPO2Widget : public QWidget
 public:
     explicit SPO2Widget(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
 
+private:
+    QVBoxLayout *layout=new QVBoxLayout;
+    QHBoxLayout *layoutHead=new QHBoxLayout;
+    QHBoxLayout *layoutBody=new QHBoxLayout;
+    QHBoxLayout *layoutBottom=new QHBoxLayout;
+    QWidget *head=new QWidget;
+    QWidget *body=new QWidget;
+    QWidget *bottom=new QWidget;
+    QLabel *title=new QLabel;
+    QLabel *tu=new QLabel;
+    QLabel *nothing=new QLabel;
+    QLabel *data=new QLabel;
+    QLabel *fu=new QLabel;
+    QLabel *bpm=new QLabel;
+    QPixmap *pix = new QPixmap(":/icons/settings.png");
 signals:
 
 };

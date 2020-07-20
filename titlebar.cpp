@@ -19,7 +19,7 @@ TitleBar::TitleBar(QWidget *parent) : QWidget(parent)
     layout->setMargin(6);
 
     deviceAndNote->setText("设备: xd001 备注: 001");
-    deviceAndNote->setStyleSheet("color: rgb(255, 255, 255);font: 11pt \"Microsoft Yahei UI Bold\";");
+    deviceAndNote->setStyleSheet("color: white;font: 11pt \"Microsoft Yahei UI Bold\";");
 
     this->setLayout(layout);
 }

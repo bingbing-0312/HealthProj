@@ -25,7 +25,7 @@ CO2Widget::CO2Widget(QWidget *parent) : QWidget(parent)
     //头部布局
     layoutHead->addWidget(title,0,Qt::AlignLeft);
     layoutHead->addWidget(setting, 0 ,Qt::AlignRight );
-    head->setStyleSheet("background-color:rgb(75, 75, 75)");
+    head->setStyleSheet("background-color:rgb(87, 96, 111)");
     head->setLayout(layoutHead);
     //中部布局
     layoutBody->addWidget(data, 0, Qt::AlignCenter|Qt::AlignBottom);
@@ -56,10 +56,10 @@ void CO2Widget::paintEvent(QPaintEvent *event)
     int px15 = h*15/128;
     //int px25 = h*25/128;
     int px40 = h*40/128;
-    data->setStyleSheet(QString("color:yellow;font: %1px , SimHei;").arg(px40));
-    bpm->setStyleSheet(QString("color:yellow;font: %1px , SimHei;").arg(px15));
-    ins->setStyleSheet(QString("color:yellow;font: %1px , SimHei;").arg(px15));
-    awrr->setStyleSheet(QString("color:yellow;font: %1px , SimHei;").arg(px15));
+    data->setStyleSheet(QString("color:rgb(236, 204, 104);font: %1px , SimHei;").arg(px40));
+    bpm->setStyleSheet(QString("color:rgb(236, 204, 104);font: %1px , SimHei;").arg(px15));
+    ins->setStyleSheet(QString("color:rgb(236, 204, 104);font: %1px , SimHei;").arg(px15));
+    awrr->setStyleSheet(QString("color:rgb(236, 204, 104);font: %1px , SimHei;").arg(px15));
 }
 
 void CO2Widget::resizeEvent(QResizeEvent *event)
