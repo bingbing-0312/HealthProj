@@ -85,6 +85,30 @@ MainWidget::MainWidget(QWidget *parent)
     connect(gs, &GetSerial::receivedECGdata, &ecgiiPlot, &PlotWidget::sendData);
     connect(gs, &GetSerial::receivedBPdata, &bpPlot, &PlotWidget::sendData);
     connect(gs, &GetSerial::receivedSPO2data, &spo2Plot, &PlotWidget::sendData);
+
+    connect(gs, &GetSerial::receivedHRdata, &hr, &HRWidget::setData);
+
+    connect(gs, &GetSerial::receivedST1data, &st, &STWidget::setST1Num);
+    connect(gs, &GetSerial::receivedST2data, &st, &STWidget::setST2Num);
+    connect(gs, &GetSerial::receivedPVCdata, &st, &STWidget::setPVCNum);
+
+    connect(gs, &GetSerial::receivedLBPdata, &nibp, &NIBPWidget::setLowPa);
+    connect(gs, &GetSerial::receivedHBPdata, &nibp, &NIBPWidget::setHighPa);
+    connect(gs, &GetSerial::receivedIBPdata, &nibp, &NIBPWidget::setAverage);
+
+    connect(gs, &GetSerial::receivedSPO2Wdata, &spo2, &SPO2Widget::setDataNum);
+    connect(gs, &GetSerial::receivedBPMdata, &spo2, &SPO2Widget::setBPMNum);
+
+    connect(gs, &GetSerial::receivedT1data, &temp, &TEMPWidget::setT1Data);
+    connect(gs, &GetSerial::receivedT2data, &temp, &TEMPWidget::setT2Data);
+    connect(gs, &GetSerial::receivedTDdata, &temp, &TEMPWidget::setTDData);
+
+    connect(gs, &GetSerial::receivedRESPdata, &resp, &RESPWidget::setData);
+
+    connect(gs, &GetSerial::receivedCO2data, &co2, &CO2Widget::setCO2Num);
+    connect(gs, &GetSerial::receivedAWRRdata, &co2, &CO2Widget::setAWRRNum);
+    connect(gs, &GetSerial::receivedINSdata, &co2, &CO2Widget::setINSNum);
+
     gs->connectPort();
     //qsrand(time(0));
     //tm = new QTimer;

@@ -25,6 +25,8 @@ private:
     QLabel *bpm = new QLabel;
     QLabel *bpm2nothing = new QLabel;
     QPixmap *pix = new QPixmap(":/icons/settings.png");
+public slots:
+    void setData(short int bpmNum);
 signals:
 
 };

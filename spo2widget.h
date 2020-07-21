@@ -30,6 +30,10 @@ private:
     QLabel *fu=new QLabel;
     QLabel *bpm=new QLabel;
     QPixmap *pix = new QPixmap(":/icons/settings.png");
+
+public slots:
+    void setDataNum(short int dataNum);
+    void setBPMNum(short int bpmNum);
 signals:
 
 };

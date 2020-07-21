@@ -34,6 +34,9 @@ public:
     //头部标签图
     QPixmap *pix = new QPixmap(":/icons/settings.png");
 
+public slots:
+    void setData(short int bpmData);
+
 signals:
 
 };

@@ -34,8 +34,12 @@ public:
     QLabel *awrr = new QLabel;
     QPixmap *pix = new QPixmap(":/icons/settings.png");
 
-signals:
+public slots:
+    void setCO2Num(short int co2num);
+    void setINSNum(short int insnum);
+    void setAWRRNum(short int awrrnum);
 
+signals:
 };
 
 #endif // CO2WIDGET_H

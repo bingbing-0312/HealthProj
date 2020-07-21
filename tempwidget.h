@@ -37,6 +37,11 @@ private:
     QLabel *tu=new QLabel;
     QPixmap *pix = new QPixmap(":/icons/settings.png");
 
+public slots:
+    void setT1Data(short int t1Num);
+    void setT2Data(short int t2Num);
+    void setTDData(short int tdNum);
+
 signals:
 
 };

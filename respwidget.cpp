@@ -66,3 +66,9 @@ void RESPWidget::resizeEvent(QResizeEvent *event)
     *pix = pix->scaledToHeight(head->height() - 18, Qt::SmoothTransformation);
     setting->setPixmap(*pix);
 }
+
+void RESPWidget::setData(short int bpmData)
+{
+    if(bpmData != -1)
+        data->setText(QString("%1").arg(bpmData));
+}

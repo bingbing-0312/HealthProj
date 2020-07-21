@@ -72,6 +72,25 @@ void NIBPWidget::setLCDTime()
     pCurrentTimeLabel->setText(timeStr);
 }
 
+void NIBPWidget::setLowPa(short int lowPa)
+{
+    if(lowPa != -1)
+        middlemiddle->setText(QString("%1").arg(lowPa));
+}
+
+void NIBPWidget::setHighPa(short int highPa)
+{
+    if(highPa != -1)
+        bodyleftLabel->setText(QString("%1").arg(highPa));
+}
+
+void NIBPWidget::setAverage(short int average)
+{
+    if(average != -1)
+        rightmiddle->setText(QString("%1").arg(average));
+}
+
+
 void NIBPWidget::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);

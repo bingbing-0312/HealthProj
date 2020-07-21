@@ -26,6 +26,10 @@ private:
     QLabel *pvcs = new QLabel;
     QPixmap *pix = new QPixmap(":/icons/settings.png");
 
+public slots:
+    void setST1Num(short int st1Num);
+    void setST2Num(short int st2Num);
+    void setPVCNum(short int pvcsNum);
 signals:
 
 };

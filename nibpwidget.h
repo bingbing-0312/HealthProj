@@ -46,6 +46,9 @@ public:
 
 public slots:
     void setLCDTime();
+    void setLowPa(short int lowPa);
+    void setHighPa(short int highPa);
+    void setAverage(short int average);
 
 private:
     QLabel *pCurrentTimeLabel = new QLabel(this);
