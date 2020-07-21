@@ -6,6 +6,7 @@
 #include <QStyleOption>
 #include <QLabel>
 #include <QLayout>
+#include "labelbutton.h"
 
 class RESPWidget : public QWidget
 {
@@ -24,7 +25,7 @@ public:
 
     //头部标签
     QLabel *title = new QLabel;
-    QLabel *setting = new QLabel;
+    LabelButton *setting = new LabelButton;
 
     //中部标签
     QLabel *nothing1 = new QLabel;

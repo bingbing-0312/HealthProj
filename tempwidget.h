@@ -7,6 +7,7 @@
 #include <QLayout>
 #include <QLabel>
 #include <QPixmap>
+#include "labelbutton.h"
 
 class TEMPWidget : public QWidget
 {
@@ -34,7 +35,7 @@ private:
     QLabel *c=new QLabel;
     QLabel *nothing=new QLabel;
     QLabel *title=new QLabel;
-    QLabel *tu=new QLabel;
+    LabelButton *tu=new LabelButton;
     QPixmap *pix = new QPixmap(":/icons/settings.png");
 
 public slots:

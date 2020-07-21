@@ -6,6 +6,7 @@
 #include <QStyleOption>
 #include <QLabel>
 #include <QLayout>
+#include "labelbutton.h"
 
 
 class CO2Widget : public QWidget
@@ -25,7 +26,7 @@ public:
     QWidget *bottom = new QWidget;
 
     QLabel *title = new QLabel;
-    QLabel *setting = new QLabel;
+    LabelButton *setting = new LabelButton;
 
     QLabel *data = new QLabel;
     QLabel *bpm = new QLabel;

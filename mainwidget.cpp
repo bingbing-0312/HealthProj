@@ -4,7 +4,9 @@ MainWidget::MainWidget(QWidget *parent)
     : QWidget(parent)
 {
     //this->setWindowFlag(Qt::FramelessWindowHint);
-    this->resize(1000, 600);
+    QScreen* screen = QGuiApplication::screens().at(0);
+    QRect screenRect = screen->availableGeometry();
+    this->resize(screenRect.width()*2/3, screenRect.height()*2/3);
 
     title.setFixedHeight(50);
     title.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -61,24 +63,27 @@ MainWidget::MainWidget(QWidget *parent)
 
     this->setLayout(splitTitle);
 
+    connect(&title, &TitleBar::enablefullscreen, this, &MainWidget::setFull);
+    connect(&title, &TitleBar::disablefullscreen, this, &MainWidget::setNotFull);
+
     //测试区
     ecgiiPlot.y0 = 0;
     ecgiiPlot.yScale = 4096;
-    ecgiiPlot.xScale = 1500;
+    ecgiiPlot.xScale = 1000;
     ecgiiPlot.updateInterval = 1;
     ecgiiPlot.color = Qt::green;
     ecgiiPlot.text = "ECG";
 
     spo2Plot.y0 = 0;
     spo2Plot.yScale = 300;
-    spo2Plot.xScale = 1500;
+    spo2Plot.xScale = 1000;
     spo2Plot.updateInterval = 1;
     spo2Plot.color = Qt::red;
     spo2Plot.text = "SPO2";
 
     bpPlot.y0 = 0;
     bpPlot.yScale = 300;
-    bpPlot.xScale = 1500;
+    bpPlot.xScale = 1000;
     bpPlot.updateInterval = 1;
     bpPlot.color = Qt::yellow;
     bpPlot.text = "BP";
@@ -110,28 +115,6 @@ MainWidget::MainWidget(QWidget *parent)
     connect(gs, &GetSerial::receivedINSdata, &co2, &CO2Widget::setINSNum);
 
     gs->connectPort();
-    //qsrand(time(0));
-    //tm = new QTimer;
-    //connect(tm, &QTimer::timeout, this, &MainWidget::testPlot);
-    //tm->start(10);
-    //
-    //iData = testData.begin();
-    //
-    //lineedit1->setParent(this);
-    //button1->setParent(this);
-    //label1->setParent(this);
-    //
-    //lineedit1->setGeometry(0, 100, 100, 20);
-    //button1->setGeometry(0, 120, 100, 30);
-    //button1->setText("发送");
-    //label1->setGeometry(100, 100, 100, 100);
-    //label1->setStyleSheet("background-color: white");
-    //connect(button1, &QPushButton::clicked, this, &MainWidget::sendString2Port);
-    //connect(getserial, &GetSerial::receivedData, this, &MainWidget::testRead);
-    //getserial->connectPort();
-
-
-
 }
 
 MainWidget::~MainWidget()
@@ -139,24 +122,13 @@ MainWidget::~MainWidget()
 
 }
 
-//void MainWidget::testPlot()
-//{
-//    ecgiiPlot.sendData(*iData);
-//    iData+=10; //压缩，10点采样1次
-//    if(iData >= testData.end())
-//        iData = testData.begin();
-//}
-//
-//void MainWidget::sendString2Port()
-//{
-//    QString txt4send = this->lineedit1->text()+"\r\n";
-//    if(!getserial->sendString(txt4send))
-//        QMessageBox::critical(NULL, "错误", "发送失败");
-//}
-//
-//void MainWidget::testRead(QString str)
-//{
-//    label1->setText(str);
-//}
+void MainWidget::setFull()
+{
+    this->showFullScreen();
+}
 
+void MainWidget::setNotFull()
+{
+    this->showNormal();
+}
 

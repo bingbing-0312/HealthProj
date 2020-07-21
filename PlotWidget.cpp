@@ -43,11 +43,16 @@ void PlotWidget::resizeEvent(QResizeEvent *event)
 {
     Q_UNUSED(event);
     *pix = pix->scaled(this->width(), this->height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    t = 0;
+    data.clear();
+    time.clear();
+    pix->fill(Qt::black);
 }
 
 void PlotWidget::paintData()
 {
     int s = data.size()-1;
+    int dis = 0;
     painter->begin(pix);
     painter->setRenderHint(QPainter::Antialiasing,true);
     if(s>-1)
@@ -61,8 +66,14 @@ void PlotWidget::paintData()
 
     if(s>1)
     {
+        dis = 1;
         painter->setPen(QPen(color, 2));
-        painter->drawLine(time.at(s-1), data.at(s-1),
+        while(time.at(s-dis) == time.at(s) && dis < 8 && dis < s)
+        {
+            data[s] = (data.at(s) + data.at(s-dis))/2;
+            dis++;
+        }
+        painter->drawLine(time.at(s-dis), data.at(s-dis),
                           time.at(s), data.at(s));
     }
     painter->end();

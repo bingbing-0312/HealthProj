@@ -97,7 +97,7 @@ void GetSerial::statusMachine(char data)
                 {
                   emit receivedECGdata(dataForSending);
                   //qDebug()<<(pkgDataInt[0]+pkgDataInt[1]+pkgDataInt[2])/3;
-                  flagCount = 2;
+                  flagCount = 1;
                 }
                 flagCount --;
                 //flagCount++;

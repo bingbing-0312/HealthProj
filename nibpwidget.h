@@ -9,6 +9,7 @@
 #include <QLabel>
 #include <QLayout>
 #include <QDebug>
+#include "labelbutton.h"
 
 class NIBPWidget : public QWidget
 {
@@ -31,7 +32,7 @@ public:
     QWidget *bodyLeft = new QWidget;
 
     QLabel *title = new QLabel;
-    QLabel *setting = new QLabel;
+    LabelButton *setting = new LabelButton;
     QLabel *righttop = new QLabel;
     QLabel *rightmiddle = new QLabel;
     QLabel *rightbottom = new QLabel;

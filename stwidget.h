@@ -6,6 +6,7 @@
 #include <QStyleOption>
 #include <QLabel>
 #include <QLayout>
+#include "labelbutton.h"
 
 class STWidget : public QWidget
 {
@@ -20,7 +21,7 @@ private:
     QWidget *strightWidget =new QWidget;
     QWidget *titleBar = new QWidget;
     QLabel *title = new QLabel;
-    QLabel *pixContainer = new QLabel;
+    LabelButton *pixContainer = new LabelButton;
     QLabel *stl1 = new QLabel;
     QLabel *stl2 = new QLabel;
     QLabel *pvcs = new QLabel;

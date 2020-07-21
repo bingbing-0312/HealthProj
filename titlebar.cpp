@@ -22,6 +22,10 @@ TitleBar::TitleBar(QWidget *parent) : QWidget(parent)
     deviceAndNote->setStyleSheet("color: white;font: 11pt \"Microsoft Yahei UI Bold\";");
 
     this->setLayout(layout);
+    connect(cloudIcon, &LabelButton::clicked, this, &TitleBar::openTCPWindow);
+    connect(exclamationIcon, &LabelButton::clicked, this, &TitleBar::openDSWindow);
+    connect(peopleInfoIcon, &LabelButton::clicked, this, &TitleBar::openINFOWindow);
+    connect(scaleIcon, &LabelButton::clicked, this, &TitleBar::setFullscreen);
 }
 
 void TitleBar::paintEvent(QPaintEvent *event)
@@ -47,3 +51,28 @@ void TitleBar::resizeEvent(QResizeEvent *event)
     scaleIcon->setPixmap(*scalePNG);
     exclamationIcon->setPixmap(*exclamationPNG);
 }
+
+void TitleBar::openDSWindow()
+{
+
+}
+
+void TitleBar::openTCPWindow()
+{
+
+}
+
+void TitleBar::openINFOWindow()
+{
+
+}
+
+void TitleBar::setFullscreen()
+{
+    if(isfullscreen)
+        emit disablefullscreen();
+    else
+        emit enablefullscreen();
+    isfullscreen = !isfullscreen;
+}
+

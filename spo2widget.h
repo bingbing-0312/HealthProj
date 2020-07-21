@@ -6,6 +6,7 @@
 #include <QStyleOption>
 #include <QLayout>
 #include <QLabel>
+#include "labelbutton.h"
 
 class SPO2Widget : public QWidget
 {
@@ -24,7 +25,7 @@ private:
     QWidget *body=new QWidget;
     QWidget *bottom=new QWidget;
     QLabel *title=new QLabel;
-    QLabel *tu=new QLabel;
+    LabelButton *tu=new LabelButton;
     QLabel *nothing=new QLabel;
     QLabel *data=new QLabel;
     QLabel *fu=new QLabel;
