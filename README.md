@@ -7,8 +7,8 @@
  - :white_check_mark:封装波形图绘制的Widget
  - :white_check_mark:右侧窗口部件界面
  - :white_check_mark:文字大小随窗口大小自动缩放
- - :red_circle:窗口部件的数据接口
- - :red_circle:串口增设数据协议
+ - :white_check_mark:窗口部件的数据接口
+ - :white_check_mark:串口增设数据协议
  - :red_circle:服务端数据库设计及部署
  - :red_circle:服务端CRUD对接程序
  - :red_circle:封装网络UDP协议类
