@@ -1,5 +1,16 @@
 # HealthProj
 
+## 计划完成
+
+ - :white_check_mark:文字大小随窗口大小自动缩放
+ - :red_circle:窗口部件的数据接口
+ - :red_circle:串口增加数据
+ - :red_circle:封装网络UDP协议类
+ - :red_circle:数据来源设置窗口
+ - :red_circle:历史数据窗口
+ - :red_circle:病人信息窗口
+ - :red_circle:全屏按钮
+
 ## 窗口部件分工
 
  - :white_check_mark:黄灏：	整体布局界面、波形、串口
