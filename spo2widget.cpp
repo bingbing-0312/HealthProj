@@ -34,7 +34,7 @@ SPO2Widget::SPO2Widget(QWidget *parent) : QWidget(parent)
     bottom->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
     //整体布局
     layout->addWidget(head,0);
-    layout->addWidget(body, 0);
+    layout->addWidget(body, 1);
     layout->addWidget(bottom, 0);
     layout->setMargin(0);
     layout->setSpacing(0);
