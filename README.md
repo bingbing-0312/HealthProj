@@ -13,4 +13,4 @@
 ![](https://cdn.jsdelivr.net/gh/huanghaozi/Storage4App@master/20200718/20200718115613b24d0116dee6d1759032094ced190ae5.jpg)
 
 ## 目前完成情况
-![](https://cdn.jsdelivr.net/gh/huanghaozi/Storage4App@master/20200720/202007200925023bc877ae2365d253ab5bb8e625d2c8f9.png)
+![](https://cdn.jsdelivr.net/gh/huanghaozi/Storage4App@master/20200721/2020072109460980c6f4d7a2c4f87684ca4a44834445f5.jpg)
