@@ -39,6 +39,29 @@ signals:
     void receivedBPdata(int data);
     void receivedSPO2data(int data);
 
+    void receivedHRdata(int data);
+
+    void receivedST1data(int data);
+    void receivedST2data(int data);
+    void receivedPVCdata(int data);
+
+    void receivedLBPdata(int data);
+    void receivedHBPdata(int data);
+    void receivedIBPdata(int data);
+
+    void receivedSPO2Wdata(int data);
+    void receivedBPMdata(int data);
+
+    void receivedT1data(int data);
+    void receivedT2data(int data);
+    void receivedTDdata(int data);
+
+    void receivedRESPdata(int data);
+
+    void receivedCO2data(int data);
+    void receivedAWRRdata(int data);
+    void receivedINSdata(int data);
+
 };
 
 #endif // GETSERIAL_H
