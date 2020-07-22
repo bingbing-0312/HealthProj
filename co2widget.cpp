@@ -4,16 +4,11 @@ CO2Widget::CO2Widget(QWidget *parent) : QWidget(parent)
 {
     this->setStyleSheet("background:rgb(0,0,0)");
     head->setFixedHeight(30);
-    head->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    head->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
+    body->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
+    bottom->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     title->setStyleSheet("color:rgb(255, 255, 255);font: 11pt , SimHei;");
 
-    //中部标签
-    data->setStyleSheet("color:yellow;font: 30pt , SimHei;");
-    bpm->setStyleSheet("color:yellow;font: 11pt , SimHei;");
-    //尾部标签
-    //QLabel *nothing2 = new QLabel;
-    ins->setStyleSheet("color:yellow;font: 11pt , SimHei;");
-    awrr->setStyleSheet("color:yellow;font: 11pt , SimHei;");
 
     //头部标签数据写入
     title->setText("CO2");
@@ -24,18 +19,16 @@ CO2Widget::CO2Widget(QWidget *parent) : QWidget(parent)
     bpm->setText("mmHg");
 
     //尾部标签写入
-    ins->setText("ins -?-  ");
-    awrr->setText("  awrr -?-");
+    ins->setText("ins -?-");
+    awrr->setText("awrr -?-");
 
     //头部布局
     layoutHead->addWidget(title,0,Qt::AlignLeft);
     layoutHead->addWidget(setting, 0 ,Qt::AlignRight );
-    head->setStyleSheet("background-color:rgb(75, 75, 75)");
+    head->setStyleSheet("background-color:rgb(87, 96, 111)");
     head->setLayout(layoutHead);
     //中部布局
-    layoutBody->addSpacerItem(new QSpacerItem(1,1, QSizePolicy::Expanding));
     layoutBody->addWidget(data, 0, Qt::AlignCenter|Qt::AlignBottom);
-    layoutBody->addSpacerItem(new QSpacerItem(1,1, QSizePolicy::Expanding));
     layoutBody->addWidget(bpm ,0 ,Qt::AlignRight | Qt::AlignTop);
     body->setLayout(layoutBody);
     //尾部布局
@@ -59,6 +52,14 @@ void CO2Widget::paintEvent(QPaintEvent *event)
     opt.init(this);
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+    int h = this->height();
+    int px15 = h*15/128;
+    //int px25 = h*25/128;
+    int px40 = h*40/128;
+    data->setStyleSheet(QString("color:rgb(236, 204, 104);font: %1px , SimHei;").arg(px40));
+    bpm->setStyleSheet(QString("color:rgb(236, 204, 104);font: %1px , SimHei;").arg(px15));
+    ins->setStyleSheet(QString("color:rgb(236, 204, 104);font: %1px , SimHei;").arg(px15));
+    awrr->setStyleSheet(QString("color:rgb(236, 204, 104);font: %1px , SimHei;").arg(px15));
 }
 
 void CO2Widget::resizeEvent(QResizeEvent *event)
@@ -66,4 +67,22 @@ void CO2Widget::resizeEvent(QResizeEvent *event)
     Q_UNUSED(event);
     *pix = pix->scaledToHeight(head->height()-18, Qt::SmoothTransformation);
     setting->setPixmap(*pix);
+}
+
+void CO2Widget::setINSNum(short int insNum)
+{
+    if(insNum != -1)
+        data->setText(QString("%1").arg(insNum));
+}
+
+void CO2Widget::setAWRRNum(short int awrrNum)
+{
+    if(awrrNum != -1)
+        data->setText(QString("%1").arg(awrrNum));
+}
+
+void CO2Widget::setCO2Num(short int co2num)
+{
+    if(co2num != -1)
+        data->setText(QString("%1").arg(co2num));
 }

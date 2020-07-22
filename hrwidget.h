@@ -4,6 +4,10 @@
 #include <QWidget>
 #include <QPainter>
 #include <QStyleOption>
+#include <QLabel>
+#include <QLayout>
+#include <QPixmap>
+#include "labelbutton.h"
 
 class HRWidget : public QWidget
 {
@@ -11,7 +15,19 @@ class HRWidget : public QWidget
 public:
     explicit HRWidget(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event) override;
-
+    void resizeEvent(QResizeEvent *event) override;
+private:
+    QVBoxLayout *hrlayout =new QVBoxLayout;
+    QHBoxLayout *titlebarLayout = new QHBoxLayout;
+    QWidget *titlebar = new QWidget(this);
+    QLabel *title = new QLabel;
+    LabelButton *pixContainer = new LabelButton;
+    QLabel *data = new QLabel;
+    QLabel *bpm = new QLabel;
+    QLabel *bpm2nothing = new QLabel;
+    QPixmap *pix = new QPixmap(":/icons/settings.png");
+public slots:
+    void setData(short int bpmNum);
 signals:
 
 };

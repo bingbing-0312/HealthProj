@@ -3,19 +3,15 @@
 RESPWidget::RESPWidget(QWidget *parent) : QWidget(parent)
 {
     this->setStyleSheet("background:rgb(0,0,0)");
-    head->setStyleSheet("background-color:rgb(75, 75, 75)");
+    head->setStyleSheet("background-color:rgb(87, 96, 111)");
     head->setFixedHeight(30);
     head->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    title->setStyleSheet("color:rgb(255, 255, 255);font: 11pt , SimHei;");
-    data->setStyleSheet("color:yellow;font: 36pt , SimHei;");
-    bpm->setStyleSheet("color:yellow;font: 11pt , SimHei;");
+    title->setStyleSheet("color:white;font: 11pt , SimHei;");
 
     //头部标签数据写入
     title->setText("RESP");
     setting->setPixmap(*pix);
 
-    //中部标签数据写入
-    //nothing1->setText("    ");
     data->setText("-?-");
     bpm->setText("bpm");
 
@@ -28,8 +24,11 @@ RESPWidget::RESPWidget(QWidget *parent) : QWidget(parent)
     layoutHead->addWidget(setting, 0 ,Qt::AlignRight );
     head->setLayout(layoutHead);
     //中部布局
+    layoutBody1->addSpacerItem(new QSpacerItem(1,1,QSizePolicy::Expanding,QSizePolicy::Minimum));
     layoutBody1->addWidget(bpm ,0 ,Qt::AlignRight | Qt::AlignTop);
+    layoutBody2->addSpacerItem(new QSpacerItem(1,1,QSizePolicy::Expanding,QSizePolicy::Minimum));
     layoutBody2->addWidget(data, 1, Qt::AlignCenter|Qt::AlignTop);
+    layoutBody2->addSpacerItem(new QSpacerItem(1,1,QSizePolicy::Expanding,QSizePolicy::Minimum));
     layoutBody->addLayout(layoutBody1, 0);
     layoutBody->addLayout(layoutBody2, 1);
     body->setLayout(layoutBody);
@@ -52,6 +51,13 @@ void RESPWidget::paintEvent(QPaintEvent *event)
     opt.init(this);
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+    int w = this->width();
+    int h = this->height();
+    int px15 = h*15/128 > w*15/128? w*15/128:h*15/128;
+    int px40 = h*40/128 > w*40/128? w*40/128:h*40/128;
+    data->setStyleSheet(QString("color:rgb(236, 204, 104);font: %1px , SimHei;").arg(px40));
+    bpm->setStyleSheet(QString("color:rgb(236, 204, 104);font: %1px , SimHei;").arg(px15));
+
 }
 
 void RESPWidget::resizeEvent(QResizeEvent *event)
@@ -59,4 +65,10 @@ void RESPWidget::resizeEvent(QResizeEvent *event)
     Q_UNUSED(event);
     *pix = pix->scaledToHeight(head->height() - 18, Qt::SmoothTransformation);
     setting->setPixmap(*pix);
+}
+
+void RESPWidget::setData(short int bpmData)
+{
+    if(bpmData != -1)
+        data->setText(QString("%1").arg(bpmData));
 }
