@@ -34,7 +34,6 @@ MainWidget::MainWidget(QWidget *parent)
     leftrightLayout->setStretch(1, 1);
     leftrightLayout->setMargin(0);
     leftrightLayout->setSpacing(1);
-
     leftPlotsLayout->addWidget(&ecgiiPlot);
     leftPlotsLayout->addWidget(&spo2Plot);
     leftPlotsLayout->addWidget(&bpPlot);
@@ -122,6 +121,11 @@ MainWidget::MainWidget(QWidget *parent)
 MainWidget::~MainWidget()
 {
 
+}
+
+void MainWidget::resizeEvent(QResizeEvent *event)
+{
+    Q_UNUSED(event);
 }
 
 void MainWidget::setFull()

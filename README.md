@@ -11,7 +11,7 @@
  - :white_check_mark:串口增设数据协议
  - :red_circle:服务端数据库设计及部署
  - :red_circle:服务端TCP与mysql对接程序
- - :red_circle:封装网络TCP协议类
+ - :white_check_mark:封装网络TCP协议类
  - :red_circle:数据来源设置窗口
  - :red_circle:历史数据窗口
  - :red_circle:病人信息窗口
