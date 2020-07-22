@@ -24,7 +24,6 @@ TCPSettingsWidget::TCPSettingsWidget(QWidget *parent) : QWidget(parent)
 
 void TCPSettingsWidget::setTCPIP()
 {
-    qDebug() << "test1";
     emit tcpipChanged(ipEdit->text(), portEdit->text().toUInt());
 }
 

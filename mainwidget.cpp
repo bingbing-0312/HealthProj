@@ -140,6 +140,5 @@ void MainWidget::setTCPIP(QString ip, quint16 mport)
     port = mport;
     socket->abort();
     socket->connectToServer(ipAddr, port);
-    qDebug() << "test3";
 }
 
