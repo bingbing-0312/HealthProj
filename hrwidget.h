@@ -16,6 +16,7 @@ public:
     explicit HRWidget(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
+    int dataForTCPSend;
 private:
     QVBoxLayout *hrlayout =new QVBoxLayout;
     QHBoxLayout *titlebarLayout = new QHBoxLayout;

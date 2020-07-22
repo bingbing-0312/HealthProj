@@ -2,6 +2,7 @@
 #define PATIENTINFOWIDGET_H
 
 #include <QWidget>
+#include "TCPSocket.h"
 
 class PatientInfoWidget : public QWidget
 {
@@ -9,6 +10,7 @@ class PatientInfoWidget : public QWidget
 public:
     explicit PatientInfoWidget(QWidget *parent = nullptr);
 
+    TCPSocket *socket;
 signals:
 
 };

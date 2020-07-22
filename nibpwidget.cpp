@@ -76,18 +76,21 @@ void NIBPWidget::setLowPa(short int lowPa)
 {
     if(lowPa != -1)
         middlemiddle->setText(QString("%1").arg(lowPa));
+    dataForTCPSend2 = lowPa;
 }
 
 void NIBPWidget::setHighPa(short int highPa)
 {
     if(highPa != -1)
         bodyleftLabel->setText(QString("%1").arg(highPa));
+    dataForTCPSend1 = highPa;
 }
 
 void NIBPWidget::setAverage(short int average)
 {
     if(average != -1)
         rightmiddle->setText(QString("%1").arg(average));
+    dataForTCPSend3 = average;
 }
 
 

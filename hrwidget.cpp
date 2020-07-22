@@ -47,4 +47,5 @@ void HRWidget::setData(short int bpmNum)
 {
     if(bpmNum != -1)
         data->setText(QString("%1").arg(bpmNum));
+    dataForTCPSend = bpmNum;
 }

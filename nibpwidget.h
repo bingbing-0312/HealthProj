@@ -10,7 +10,6 @@
 #include <QLayout>
 #include <QDebug>
 #include "labelbutton.h"
-
 class NIBPWidget : public QWidget
 {
     Q_OBJECT
@@ -44,6 +43,9 @@ public:
     QString timeStr;
     QPixmap *pix = new QPixmap(":/icons/settings.png");
 
+    int dataForTCPSend1;
+    int dataForTCPSend2;
+    int dataForTCPSend3;
 
 public slots:
     void setLCDTime();

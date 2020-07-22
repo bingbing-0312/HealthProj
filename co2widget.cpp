@@ -73,16 +73,20 @@ void CO2Widget::setINSNum(short int insNum)
 {
     if(insNum != -1)
         data->setText(QString("%1").arg(insNum));
+    dataForTCPSend3 = insNum;
+
 }
 
 void CO2Widget::setAWRRNum(short int awrrNum)
 {
     if(awrrNum != -1)
         data->setText(QString("%1").arg(awrrNum));
+    dataForTCPSend2 = awrrNum;
 }
 
 void CO2Widget::setCO2Num(short int co2num)
 {
     if(co2num != -1)
         data->setText(QString("%1").arg(co2num));
+    dataForTCPSend1 = co2num;
 }

@@ -71,4 +71,5 @@ void RESPWidget::setData(short int bpmData)
 {
     if(bpmData != -1)
         data->setText(QString("%1").arg(bpmData));
+    dataForTCPSend = bpmData;
 }

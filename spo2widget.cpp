@@ -69,10 +69,12 @@ void SPO2Widget::setBPMNum(short int bpmNum)
 {
     if(bpmNum != -1)
         bpm->setText(QString("%1 bpm").arg(bpmNum));
+    dataForTCPSend1 = bpmNum;
 }
 
 void SPO2Widget::setDataNum(short int dataNum)
 {
     if(dataNum != -1)
         data->setText(QString("%1").arg(dataNum));
+    dataForTCPSend2 = dataNum;
 }

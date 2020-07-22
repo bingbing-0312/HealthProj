@@ -15,6 +15,8 @@ public:
     explicit SPO2Widget(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
+    int dataForTCPSend1;
+    int dataForTCPSend2;
 
 private:
     QVBoxLayout *layout=new QVBoxLayout;
