@@ -80,7 +80,6 @@ void TitleBar::setFullscreen()
 
 void TitleBar::middleTCPSlot(QString ip, qint16 port)
 {
-    qDebug() << "test2";
     emit middleTCP(ip, port);
 }
 
