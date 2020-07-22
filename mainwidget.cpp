@@ -72,6 +72,7 @@ MainWidget::MainWidget(QWidget *parent)
     ecgiiPlot.updateInterval = 1;
     ecgiiPlot.color = Qt::green;
     ecgiiPlot.text = "ECG";
+    ecgiiPlot.plotflag = 1;
 
     spo2Plot.y0 = 0;
     spo2Plot.yScale = 300;
@@ -79,6 +80,7 @@ MainWidget::MainWidget(QWidget *parent)
     spo2Plot.updateInterval = 1;
     spo2Plot.color = Qt::red;
     spo2Plot.text = "SPO2";
+    spo2Plot.plotflag = 2;
 
     bpPlot.y0 = 0;
     bpPlot.yScale = 300;
@@ -86,6 +88,8 @@ MainWidget::MainWidget(QWidget *parent)
     bpPlot.updateInterval = 1;
     bpPlot.color = Qt::yellow;
     bpPlot.text = "BP";
+    bpPlot.plotflag = 3;
+
     connect(gs, &GetSerial::receivedECGdata, &ecgiiPlot, &PlotWidget::sendData);
     connect(gs, &GetSerial::receivedBPdata, &bpPlot, &PlotWidget::sendData);
     connect(gs, &GetSerial::receivedSPO2data, &spo2Plot, &PlotWidget::sendData);
@@ -118,8 +122,11 @@ MainWidget::MainWidget(QWidget *parent)
     connect(&title, &TitleBar::middleTCP, this, &MainWidget::setTCPIP);
 
     connect(tcpSendTimer, &QTimer::timeout, this, &MainWidget::sendTCPOthers);
-    connect(tcpWaveSendTimer, &QTimer::timeout, this, &MainWidget::sendTCPWaves);
     connect(socket, &TCPSocket::dealMessage, this, &MainWidget::TCPGetMessage);
+
+    connect(&ecgiiPlot, &PlotWidget::dataFulledForTCP, this, &MainWidget::sendTCPWaves);
+    connect(&spo2Plot, &PlotWidget::dataFulledForTCP, this, &MainWidget::sendTCPWaves);
+    connect(&bpPlot, &PlotWidget::dataFulledForTCP, this, &MainWidget::sendTCPWaves);
 
 }
 
@@ -151,6 +158,7 @@ void MainWidget::setTCPIP(QString ip, quint16 mport)
     socket->connectToServer(ipAddr, port);
     socket->SendMessage(QString("facility,%1").arg(facilitySerialNum).toUtf8());
     tcpSendTimer->start(1000);
+    connected = true;
     //tcpWaveSendTimer->start(10000);
 }
 
@@ -209,9 +217,66 @@ void MainWidget::sendTCPOthers()
     }
 }
 
-void MainWidget::sendTCPWaves()
+void MainWidget::sendTCPWaves(int flag)
 {
-
+    if(connected)
+    {
+        QString strForTCP = "";
+        TCPSocket *socket2 = new TCPSocket;
+        TCPSocket *socket3 = new TCPSocket;
+        TCPSocket *socket4 = new TCPSocket;
+        socket2->connectToServer(ipAddr, port);
+        socket3->connectToServer(ipAddr, port);
+        socket4->connectToServer(ipAddr, port);
+        if(flag == 1)
+        {
+            strForTCP= QString("ecgplot,%1,").arg(facilityName);
+            qDebug() << facilityName;
+            qDebug() << strForTCP;
+            for(int i=0;i<ecgiiPlot.dataForTCP.size();i++)
+            {
+                strForTCP.append(QString("%1").arg(ecgiiPlot.dataForTCP.at(i)));
+                if(i < ecgiiPlot.dataForTCP.size() - 1)
+                {
+                    strForTCP.append(".");
+                }
+            }
+            socket2->SendMessage(strForTCP.toUtf8());
+            socket2->close();
+            ecgiiPlot.dataForTCP.clear();
+            qDebug() <<"success";
+        }
+        else if(flag == 2)
+        {
+            strForTCP= QString("spo2plot,%1,").arg(facilityName);
+            for(int i=0;i<spo2Plot.dataForTCP.size();i++)
+            {
+                strForTCP.append(QString("%1;").arg(spo2Plot.dataForTCP.at(i)));
+                if(i < spo2Plot.dataForTCP.size() - 1)
+                {
+                    strForTCP.append(".");
+                }
+            }
+            socket3->SendMessage(strForTCP.toUtf8());
+            socket3->close();
+            spo2Plot.dataForTCP.clear();
+        }
+        else if(flag == 3)
+        {
+            strForTCP= QString("bpplot,%1,").arg(facilityName);
+            for(int i=0;i<bpPlot.dataForTCP.size();i++)
+            {
+                strForTCP.append(QString("%1;").arg(bpPlot.dataForTCP.at(i)));
+                if(i < bpPlot.dataForTCP.size() - 1)
+                {
+                    strForTCP.append(".");
+                }
+            }
+            socket4->SendMessage(strForTCP.toUtf8());
+            socket4->close();
+            bpPlot.dataForTCP.clear();
+        }
+    }
 }
 
 void MainWidget::TCPGetMessage(QByteArray ba)

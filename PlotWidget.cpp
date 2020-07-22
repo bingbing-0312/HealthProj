@@ -73,6 +73,8 @@ void PlotWidget::paintData()
             data[s] = (data.at(s) + data.at(s-dis))/2;
             dis++;
         }
+        if(dataForTCP.length() < 200)
+            dataForTCP.append(data.at(s-dis));
         painter->drawLine(time.at(s-dis), data.at(s-dis),
                           time.at(s), data.at(s));
     }
@@ -87,6 +89,10 @@ void PlotWidget::paintSlot()
         t = 0;
         data.clear();
         time.clear();
+    }
+    if(dataForTCP.size() >= 200)
+    {
+        emit dataFulledForTCP(plotflag);
     }
     this->update();
 }
