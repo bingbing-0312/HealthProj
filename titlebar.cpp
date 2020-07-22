@@ -22,6 +22,11 @@ TitleBar::TitleBar(QWidget *parent) : QWidget(parent)
     deviceAndNote->setStyleSheet("color: white;font: 11pt \"Microsoft Yahei UI Bold\";");
 
     this->setLayout(layout);
+    connect(cloudIcon, &LabelButton::clicked, this, &TitleBar::openTCPWindow);
+    connect(exclamationIcon, &LabelButton::clicked, this, &TitleBar::openDSWindow);
+    connect(peopleInfoIcon, &LabelButton::clicked, this, &TitleBar::openINFOWindow);
+    connect(scaleIcon, &LabelButton::clicked, this, &TitleBar::setFullscreen);
+    connect(tcpsettings, &TCPSettingsWidget::tcpipChanged, this, &TitleBar::middleTCPSlot);
 }
 
 void TitleBar::paintEvent(QPaintEvent *event)
@@ -46,4 +51,36 @@ void TitleBar::resizeEvent(QResizeEvent *event)
     peopleInfoIcon->setPixmap(*infoPNG);
     scaleIcon->setPixmap(*scalePNG);
     exclamationIcon->setPixmap(*exclamationPNG);
+    tcpsettings->setWindowSize(this->width()/3, this->height()*3);
 }
+
+void TitleBar::openDSWindow()
+{
+    ds->show();
+}
+
+void TitleBar::openTCPWindow()
+{
+    tcpsettings->show();
+}
+
+void TitleBar::openINFOWindow()
+{
+    pinfo->show();
+}
+
+void TitleBar::setFullscreen()
+{
+    if(isfullscreen)
+        emit disablefullscreen();
+    else
+        emit enablefullscreen();
+    isfullscreen = !isfullscreen;
+}
+
+void TitleBar::middleTCPSlot(QString ip, qint16 port)
+{
+    qDebug() << "test2";
+    emit middleTCP(ip, port);
+}
+

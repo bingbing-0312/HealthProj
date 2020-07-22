@@ -42,3 +42,9 @@ void HRWidget::resizeEvent(QResizeEvent *event)
     bpm->setStyleSheet(QString("color:rgb(123, 237, 159); font: %1px, SimHei").arg(px15));
     bpm2nothing->setStyleSheet(QString("color:rgb(123, 237, 159); font: %1px, SimHei").arg(px15));
 }
+
+void HRWidget::setData(short int bpmNum)
+{
+    if(bpmNum != -1)
+        data->setText(QString("%1").arg(bpmNum));
+}

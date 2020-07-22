@@ -9,6 +9,7 @@
 #include <QLabel>
 #include <QLayout>
 #include <QDebug>
+#include "labelbutton.h"
 
 class NIBPWidget : public QWidget
 {
@@ -31,7 +32,7 @@ public:
     QWidget *bodyLeft = new QWidget;
 
     QLabel *title = new QLabel;
-    QLabel *setting = new QLabel;
+    LabelButton *setting = new LabelButton;
     QLabel *righttop = new QLabel;
     QLabel *rightmiddle = new QLabel;
     QLabel *rightbottom = new QLabel;
@@ -46,6 +47,9 @@ public:
 
 public slots:
     void setLCDTime();
+    void setLowPa(short int lowPa);
+    void setHighPa(short int highPa);
+    void setAverage(short int average);
 
 private:
     QLabel *pCurrentTimeLabel = new QLabel(this);

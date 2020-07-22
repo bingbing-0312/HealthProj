@@ -6,6 +6,10 @@
 #include <QStyleOption>
 #include <QLabel>
 #include <QLayout>
+#include "labelbutton.h"
+#include "DeviceSettingsWidget.h"
+#include "TCPSettingsWidget.h"
+#include "PatientInfoWidget.h"
 
 class TitleBar : public QWidget
 {
@@ -20,18 +24,32 @@ private:
 
     QLabel *deviceAndNote = new QLabel(this);
     QLabel *peopleIcon = new QLabel(this);
-    QLabel *cloudIcon = new QLabel(this);
-    QLabel *exclamationIcon = new QLabel(this);
-    QLabel *peopleInfoIcon = new QLabel(this);
-    QLabel *scaleIcon = new QLabel(this);
+    LabelButton *cloudIcon = new LabelButton(this);
+    LabelButton *exclamationIcon = new LabelButton(this);
+    LabelButton *peopleInfoIcon = new LabelButton(this);
+    LabelButton *scaleIcon = new LabelButton(this);
 
     QPixmap *peoplePNG = new QPixmap(":/icons/people.png");
     QPixmap *exclamationPNG = new QPixmap(":/icons/exclamation.png");
     QPixmap *scalePNG = new QPixmap(":/icons/scale.png");
     QPixmap *cloudPNG = new QPixmap(":/icons/cloud.png");
     QPixmap *infoPNG = new QPixmap(":/icons/info.png");
-signals:
 
+    DeviceSettingsWidget *ds = new DeviceSettingsWidget;
+    TCPSettingsWidget *tcpsettings = new TCPSettingsWidget(NULL);
+    PatientInfoWidget *pinfo = new PatientInfoWidget;
+    bool isfullscreen = false;
+
+public slots:
+    void openDSWindow();
+    void openTCPWindow();
+    void openINFOWindow();
+    void setFullscreen();
+    void middleTCPSlot(QString ip, qint16 port);
+signals:
+    void enablefullscreen();
+    void disablefullscreen();
+    void middleTCP(QString ip, qint16 port);
 };
 
 #endif // TITLEBAR_H

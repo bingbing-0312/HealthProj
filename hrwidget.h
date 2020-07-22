@@ -7,6 +7,7 @@
 #include <QLabel>
 #include <QLayout>
 #include <QPixmap>
+#include "labelbutton.h"
 
 class HRWidget : public QWidget
 {
@@ -20,11 +21,13 @@ private:
     QHBoxLayout *titlebarLayout = new QHBoxLayout;
     QWidget *titlebar = new QWidget(this);
     QLabel *title = new QLabel;
-    QLabel *pixContainer = new QLabel;
+    LabelButton *pixContainer = new LabelButton;
     QLabel *data = new QLabel;
     QLabel *bpm = new QLabel;
     QLabel *bpm2nothing = new QLabel;
     QPixmap *pix = new QPixmap(":/icons/settings.png");
+public slots:
+    void setData(short int bpmNum);
 signals:
 
 };

@@ -68,3 +68,21 @@ void CO2Widget::resizeEvent(QResizeEvent *event)
     *pix = pix->scaledToHeight(head->height()-18, Qt::SmoothTransformation);
     setting->setPixmap(*pix);
 }
+
+void CO2Widget::setINSNum(short int insNum)
+{
+    if(insNum != -1)
+        data->setText(QString("%1").arg(insNum));
+}
+
+void CO2Widget::setAWRRNum(short int awrrNum)
+{
+    if(awrrNum != -1)
+        data->setText(QString("%1").arg(awrrNum));
+}
+
+void CO2Widget::setCO2Num(short int co2num)
+{
+    if(co2num != -1)
+        data->setText(QString("%1").arg(co2num));
+}

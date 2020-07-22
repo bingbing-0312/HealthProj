@@ -64,3 +64,15 @@ void SPO2Widget::resizeEvent(QResizeEvent *event)
     nothing->setStyleSheet(QString("color:rgb(255, 107, 129);font: %1px ,SimHei;").arg(px15));
     bpm->setStyleSheet(QString("color:rgb(255, 107, 129);font: %1px ,SimHei;").arg(px15));
 }
+
+void SPO2Widget::setBPMNum(short int bpmNum)
+{
+    if(bpmNum != -1)
+        bpm->setText(QString("%1 bpm").arg(bpmNum));
+}
+
+void SPO2Widget::setDataNum(short int dataNum)
+{
+    if(dataNum != -1)
+        data->setText(QString("%1").arg(dataNum));
+}

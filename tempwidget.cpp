@@ -65,3 +65,22 @@ void TEMPWidget::resizeEvent(QResizeEvent *event)
     td->setStyleSheet(QString("color: rgb(224, 86, 253);font: %1px , SimHei;").arg(px22));
     c->setStyleSheet(QString("color: rgb(224, 86, 253);font: %1px , SimHei;").arg(px22));
 }
+
+void TEMPWidget::setT1Data(short int t1Num)
+{
+    if(t1Num != -1)
+        t1->setText(QString("T1 %1").arg(t1Num));
+}
+
+void TEMPWidget::setT2Data(short int t2Num)
+{
+    if(t2Num != -1)
+        t2->setText(QString("T2 %1").arg(t2Num));
+}
+
+void TEMPWidget::setTDData(short int tdNum)
+{
+    if(tdNum != -1)
+        td->setText(QString("TD %1").arg(tdNum));
+}
+
