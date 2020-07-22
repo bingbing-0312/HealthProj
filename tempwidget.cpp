@@ -58,7 +58,7 @@ void TEMPWidget::resizeEvent(QResizeEvent *event)
     *pix = pix->scaledToHeight(head->height()-18, Qt::SmoothTransformation);
     tu->setPixmap(*pix);
     int w = this->width(), h = this->height();
-    int px22 = w*22/128 > h*22/128? h*22/128 : w*17/128;
+    int px22 = w*21/128 > h*21/128? h*21/128 : w*21/128;
     //int px20 = w*20/128 > h*20/128? h*20/128 : w*20/128;
     t1->setStyleSheet(QString("color: rgb(224, 86, 253);font: %1px , SimHei;").arg(px22));
     t2->setStyleSheet(QString("color: rgb(224, 86, 253);font: %1px , SimHei;").arg(px22));
