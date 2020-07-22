@@ -50,5 +50,4 @@ void TCPSocket::receiveMessage()
         qDebug() << "receive sucess:" << nread;
         emit dealMessage(ba);
     }
-
 }
