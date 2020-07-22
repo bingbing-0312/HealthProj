@@ -17,11 +17,14 @@ public:
     int xScale = 500; //x范围
     double y0 = -20; //y起始值
     double yScale = 20; //y最大值
+    int plotflag = -1;
     int updateInterval = 10; //采样间隔ms数，需符合奈奎斯特准则
     QString text = "";
 
     void paintEvent(QPaintEvent *event) override; //重写重绘函数
     void resizeEvent(QResizeEvent *event) override;
+
+    QList<int> dataForTCP;
 
 private:
     QList<int> data; //数据
@@ -38,6 +41,8 @@ public slots:
     void sendData(double d); //外部获取数据函数
     void paintSlot(); //定时绘制
 
+signals:
+    void dataFulledForTCP(int flag);
 };
 
 #endif
