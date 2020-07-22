@@ -34,6 +34,9 @@ public:
     QLabel *ins = new QLabel;
     QLabel *awrr = new QLabel;
     QPixmap *pix = new QPixmap(":/icons/settings.png");
+    int dataForTCPSend1;
+    int dataForTCPSend2;
+    int dataForTCPSend3;
 
 public slots:
     void setCO2Num(short int co2num);

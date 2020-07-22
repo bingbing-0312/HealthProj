@@ -64,11 +64,25 @@ public:
     quint16 port;
     TCPSocket *socket = new TCPSocket;
 
+    QString facilityName;
+    QString facilitySerialNum = "djkfnsdkdfsfd";
+
+    QString patientName;
+    QString patientSex;
+    QString patientAge;
+    QString patientID;
+
+    QTimer *tcpSendTimer = new QTimer;
+    QTimer *tcpWaveSendTimer = new QTimer;
     //测试区
+    int counterX = 1;
 
 public slots:
     void setFull();
     void setNotFull();
     void setTCPIP(QString ip, quint16 mport);
+    void sendTCPOthers();
+    void sendTCPWaves();
+    void TCPGetMessage(QByteArray ba);
 };
 #endif // MAINWIDGET_H

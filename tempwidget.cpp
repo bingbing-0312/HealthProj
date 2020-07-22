@@ -70,17 +70,20 @@ void TEMPWidget::setT1Data(short int t1Num)
 {
     if(t1Num != -1)
         t1->setText(QString("T1 %1").arg(t1Num));
+    dataForTCPSend1 = t1Num;
 }
 
 void TEMPWidget::setT2Data(short int t2Num)
 {
     if(t2Num != -1)
         t2->setText(QString("T2 %1").arg(t2Num));
+    dataForTCPSend2 = t2Num;
 }
 
 void TEMPWidget::setTDData(short int tdNum)
 {
     if(tdNum != -1)
         td->setText(QString("TD %1").arg(tdNum));
+    dataForTCPSend3 = tdNum;
 }
 

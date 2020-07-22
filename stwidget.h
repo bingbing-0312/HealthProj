@@ -15,6 +15,9 @@ public:
     explicit STWidget(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
+    int dataForTCPSend1;
+    int dataForTCPSend2;
+    int dataForTCPSend3;
 private:
     QVBoxLayout *stlayout = new QVBoxLayout;
     QHBoxLayout *titleBarLayout = new QHBoxLayout;

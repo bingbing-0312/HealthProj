@@ -52,16 +52,19 @@ void STWidget::setST1Num(short int st1Num)
 {
     if(st1Num != -1)
         stl1->setText(QString("ST1 %1").arg(st1Num));
+    dataForTCPSend1 = st1Num;
 }
 
 void STWidget::setST2Num(short int st2Num)
 {
     if(st2Num != -1)
         stl2->setText(QString("ST2 %1").arg(st2Num));
+    dataForTCPSend2 = st2Num;
 }
 
 void STWidget::setPVCNum(short int pvcsNum)
 {
     if(pvcsNum != -1)
         pvcs->setText(QString("PVCs %1").arg(pvcsNum));
+    dataForTCPSend3 = pvcsNum;
 }

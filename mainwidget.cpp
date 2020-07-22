@@ -116,11 +116,16 @@ MainWidget::MainWidget(QWidget *parent)
     gs->connectPort();
 
     connect(&title, &TitleBar::middleTCP, this, &MainWidget::setTCPIP);
+
+    connect(tcpSendTimer, &QTimer::timeout, this, &MainWidget::sendTCPOthers);
+    connect(tcpWaveSendTimer, &QTimer::timeout, this, &MainWidget::sendTCPWaves);
+    connect(socket, &TCPSocket::dealMessage, this, &MainWidget::TCPGetMessage);
+
 }
 
 MainWidget::~MainWidget()
 {
-
+    socket->close();
 }
 
 void MainWidget::resizeEvent(QResizeEvent *event)
@@ -144,5 +149,79 @@ void MainWidget::setTCPIP(QString ip, quint16 mport)
     port = mport;
     socket->abort();
     socket->connectToServer(ipAddr, port);
+    socket->SendMessage(QString("facility,%1").arg(facilitySerialNum).toUtf8());
+    tcpSendTimer->start(1000);
+    //tcpWaveSendTimer->start(10000);
+}
+
+void MainWidget::sendTCPOthers()
+{
+    if(counterX == 1)
+    {
+        counterX++;
+        socket->SendMessage(QString("hr,%1,%2").arg(facilityName).arg(hr.dataForTCPSend).toUtf8());
+    }
+    else if(counterX == 2)
+    {
+        counterX++;
+        socket->SendMessage(QString("st,%1,%2,%3,%4").arg(facilityName)
+                        .arg(st.dataForTCPSend1)
+                        .arg(st.dataForTCPSend2)
+                        .arg(st.dataForTCPSend3).toUtf8());
+    }
+    else if(counterX == 3)
+    {
+        counterX++;
+    socket->SendMessage(QString("nibp,%1,%2,%3,%4").arg(facilityName)
+                        .arg(nibp.dataForTCPSend1)
+                        .arg(nibp.dataForTCPSend2)
+                        .arg(nibp.dataForTCPSend3).toUtf8());
+    }
+
+    else if(counterX == 4)
+    {
+        counterX++;
+    socket->SendMessage(QString("spo2,%1,%2,%3").arg(facilityName)
+                        .arg(spo2.dataForTCPSend1)
+                        .arg(spo2.dataForTCPSend2).toUtf8());
+    }
+    else if(counterX == 5)
+    {
+        counterX++;
+    socket->SendMessage(QString("temp,%1,%2,%3,%4").arg(facilityName)
+                        .arg(temp.dataForTCPSend1)
+                        .arg(temp.dataForTCPSend2)
+                        .arg(temp.dataForTCPSend3).toUtf8());
+    }
+    else if(counterX == 6)
+    {
+        counterX++;
+    socket->SendMessage(QString("resp,%1,%2").arg(facilityName)
+                        .arg(resp.dataForTCPSend).toUtf8());
+    }
+    else if(counterX == 7)
+    {
+        counterX = 1;
+    socket->SendMessage(QString("co2,%1,%2,%3,%4").arg(facilityName)
+                        .arg(co2.dataForTCPSend1)
+                        .arg(co2.dataForTCPSend2)
+                        .arg(co2.dataForTCPSend3).toUtf8());
+    }
+}
+
+void MainWidget::sendTCPWaves()
+{
+
+}
+
+void MainWidget::TCPGetMessage(QByteArray ba)
+{
+    QString msg = QString(ba);
+    QStringList msgList = msg.split(",");
+    if(msgList[0] == "faciID")
+    {
+        facilityName = msgList[1];
+        qDebug() << facilityName;
+    }
 }
 
