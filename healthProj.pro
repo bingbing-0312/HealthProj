@@ -1,4 +1,4 @@
-QT       += core gui serialport
+QT       += core gui serialport network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -21,6 +21,7 @@ SOURCES += \
     PatientInfoWidget.cpp \
     PlotWidget.cpp \
     TCPSettingsWidget.cpp \
+    TCPSocket.cpp \
     co2widget.cpp \
     hrwidget.cpp \
     labelbutton.cpp \
@@ -39,6 +40,7 @@ HEADERS += \
     PatientInfoWidget.h \
     PlotWidget.h \
     TCPSettingsWidget.h \
+    TCPSocket.h \
     co2widget.h \
     hrwidget.h \
     labelbutton.h \

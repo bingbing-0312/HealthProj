@@ -36,7 +36,7 @@ private:
     QPixmap *infoPNG = new QPixmap(":/icons/info.png");
 
     DeviceSettingsWidget *ds = new DeviceSettingsWidget;
-    TCPSettingsWidget *tcpsettings = new TCPSettingsWidget;
+    TCPSettingsWidget *tcpsettings = new TCPSettingsWidget(NULL);
     PatientInfoWidget *pinfo = new PatientInfoWidget;
     bool isfullscreen = false;
 
@@ -45,9 +45,11 @@ public slots:
     void openTCPWindow();
     void openINFOWindow();
     void setFullscreen();
+    void middleTCPSlot(QString ip, qint16 port);
 signals:
     void enablefullscreen();
     void disablefullscreen();
+    void middleTCP(QString ip, qint16 port);
 };
 
 #endif // TITLEBAR_H

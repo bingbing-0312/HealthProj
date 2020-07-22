@@ -19,6 +19,7 @@
 #include "co2widget.h"
 #include "spo2widget.h"
 #include "tempwidget.h"
+#include "TCPSocket.h"
 
 
 class MainWidget : public QWidget
@@ -58,11 +59,15 @@ public:
     CO2Widget co2;
 
     GetSerial *gs = new GetSerial("COM30");
+    QString ipAddr;
+    quint16 port;
+    TCPSocket *socket = new TCPSocket;
 
     //测试区
 
 public slots:
     void setFull();
     void setNotFull();
+    void setTCPIP(QString ip, quint16 mport);
 };
 #endif // MAINWIDGET_H

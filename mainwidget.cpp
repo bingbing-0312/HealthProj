@@ -115,6 +115,8 @@ MainWidget::MainWidget(QWidget *parent)
     connect(gs, &GetSerial::receivedINSdata, &co2, &CO2Widget::setINSNum);
 
     gs->connectPort();
+
+    connect(&title, &TitleBar::middleTCP, this, &MainWidget::setTCPIP);
 }
 
 MainWidget::~MainWidget()
@@ -130,5 +132,14 @@ void MainWidget::setFull()
 void MainWidget::setNotFull()
 {
     this->showNormal();
+}
+
+void MainWidget::setTCPIP(QString ip, quint16 mport)
+{
+    ipAddr = ip;
+    port = mport;
+    socket->abort();
+    socket->connectToServer(ipAddr, port);
+    qDebug() << "test3";
 }
 
