@@ -41,6 +41,7 @@ void Client::sendTCPOthers()
 {
     if(!facilityName.isEmpty())
     {
+        emit connectedChangedSig();
         emit facilityIDchanged(facilityName);
         if(counterX == 1)
         {

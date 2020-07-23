@@ -6,6 +6,7 @@
 #include <QTimer>
 #include <QPixmap>
 #include <QLabel>
+#include <QDebug>
 
 class PlotWidget : public QWidget
 {
@@ -19,6 +20,7 @@ public:
     double yScale = 20; //y最大值
     int plotflag = -1;
     int updateInterval = 10; //采样间隔ms数，需符合奈奎斯特准则
+    int TCPInterval = 0;
     QString text = "";
 
     void paintEvent(QPaintEvent *event) override; //重写重绘函数
