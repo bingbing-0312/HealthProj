@@ -13,8 +13,8 @@
  - :white_check_mark:服务端TCP与mysql对接Python程序
  - :white_check_mark:封装网络TCP协议类
  - :white_check_mark:全屏按钮
- - :red_circle:设备设置窗口
- - :red_circle:病人信息窗口
+ - :white_check_mark:设备设置窗口
+ - :white_check_mark:病人信息窗口
  - :red_circle:管理端程序
 
 ## 窗口部件分工
