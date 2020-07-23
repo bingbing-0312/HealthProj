@@ -10,7 +10,7 @@
  - :white_check_mark:窗口部件的数据接口
  - :white_check_mark:串口增设数据协议
  - :white_check_mark:服务端数据库设计及部署
- - :white_check_mark:服务端TCP与mysql对接程序
+ - :white_check_mark:服务端TCP与mysql对接Python程序
  - :white_check_mark:封装网络TCP协议类
  - :white_check_mark:全屏按钮
  - :red_circle:设备设置窗口
