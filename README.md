@@ -1,5 +1,22 @@
 # HealthProj
 
+## 计划完成
+
+ - :white_check_mark:封装串口通信类
+ - :white_check_mark:整体窗口框架
+ - :white_check_mark:封装波形图绘制的Widget
+ - :white_check_mark:右侧窗口部件界面
+ - :white_check_mark:文字大小随窗口大小自动缩放
+ - :white_check_mark:窗口部件的数据接口
+ - :white_check_mark:串口增设数据协议
+ - :red_circle:服务端数据库设计及部署
+ - :red_circle:服务端TCP与mysql对接程序
+ - :white_check_mark:封装网络TCP协议类
+ - :red_circle:数据来源设置窗口
+ - :red_circle:历史数据窗口
+ - :red_circle:病人信息窗口
+ - :red_circle:全屏按钮
+
 ## 窗口部件分工
 
  - :white_check_mark:黄灏：	整体布局界面、波形、串口
