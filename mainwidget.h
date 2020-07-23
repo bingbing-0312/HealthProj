@@ -20,6 +20,7 @@
 #include "spo2widget.h"
 #include "tempwidget.h"
 #include "TCPSocket.h"
+#include "client.h"
 
 
 class MainWidget : public QWidget
@@ -28,7 +29,6 @@ class MainWidget : public QWidget
 
 public:
     MainWidget(QWidget *parent = nullptr);
-    ~MainWidget();
     void resizeEvent(QResizeEvent *event) override;
 
     //注意：由于Qt对象树在销毁时，含有子对象且在栈区的对象，销毁时会把子对象也销毁
@@ -60,29 +60,26 @@ public:
     CO2Widget co2;
 
     GetSerial *gs = new GetSerial("COM30");
-    QString ipAddr;
-    quint16 port;
-    TCPSocket *socket = new TCPSocket;
-    bool connected = false;
+    //QString ipAddr;
+    //quint16 port;
+    //TCPSocket *socket = new TCPSocket;
+    //bool connected = false;
 
-    QString facilityName;
-    QString facilitySerialNum = "djkfnsdkdfsfd";
+    Client cl;
+    QThread tcpThread;
+    //QTimer tcpTimer;
 
     QString patientName;
     QString patientSex;
     QString patientAge;
     QString patientID;
 
-    QTimer *tcpSendTimer = new QTimer;
     //测试区
-    int counterX = 1;
 
 public slots:
     void setFull();
     void setNotFull();
-    void setTCPIP(QString ip, quint16 mport);
-    void sendTCPOthers();
-    void sendTCPWaves(int flag);
-    void TCPGetMessage(QByteArray ba);
+signals:
+    void initTCPSig();
 };
 #endif // MAINWIDGET_H

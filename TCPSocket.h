@@ -22,10 +22,12 @@ public slots:
     // 接收数据
     void receiveMessage();
     bool SendMessage(QByteArray content);
+    void testTCPIP(QString ip, quint16 port);
 
 signals:
     void dealMessage(QByteArray content);
-
+    void testFailed();
+    void testSuccess();
 
 };
 

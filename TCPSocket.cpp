@@ -11,9 +11,8 @@ bool TCPSocket::connectToServer(QString strIp, quint16 port)
     bool ret = true;
     this->abort();
     this->connectToHost(QHostAddress(strIp), port);
-    ret = this->waitForConnected();
+    ret = this->waitForConnected(3000);
     return ret;
-
 }
 
 bool TCPSocket::SendMessage(QByteArray content)
@@ -30,6 +29,16 @@ bool TCPSocket::SendMessage(QByteArray content)
         return true;
     }
 
+}
+
+void TCPSocket::testTCPIP(QString ip, quint16 port)
+{
+    this->abort();
+    if(this->connectToServer(ip, port))
+        emit testSuccess();
+    else
+        emit testFailed();
+    this->close();
 }
 
 
@@ -50,5 +59,4 @@ void TCPSocket::receiveMessage()
         qDebug() << "receive sucess:" << nread;
         emit dealMessage(ba);
     }
-
 }

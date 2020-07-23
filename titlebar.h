@@ -36,7 +36,7 @@ private:
     QPixmap *infoPNG = new QPixmap(":/icons/info.png");
 
     DeviceSettingsWidget *ds = new DeviceSettingsWidget;
-    TCPSettingsWidget *tcpsettings = new TCPSettingsWidget(NULL);
+    TCPSettingsWidget *tcpsettings = new TCPSettingsWidget;
     PatientInfoWidget *pinfo = new PatientInfoWidget;
     bool isfullscreen = false;
 
