@@ -18,7 +18,7 @@ TitleBar::TitleBar(QWidget *parent) : QWidget(parent)
     layout->setSpacing(8);
     layout->setMargin(6);
 
-    deviceAndNote->setText("设备: xd001 备注: 001");
+    deviceAndNote->setText("设备: " + QNetworkInterface::allInterfaces()[0].hardwareAddress().split(":").join("0") + "  备注: 001");
     deviceAndNote->setStyleSheet("color: white;font: 11pt \"Microsoft Yahei UI Bold\";");
 
     this->setLayout(layout);
@@ -27,6 +27,7 @@ TitleBar::TitleBar(QWidget *parent) : QWidget(parent)
     connect(peopleInfoIcon, &LabelButton::clicked, this, &TitleBar::openINFOWindow);
     connect(scaleIcon, &LabelButton::clicked, this, &TitleBar::setFullscreen);
     connect(tcpsettings, &TCPSettingsWidget::tcpipChanged, this, &TitleBar::middleTCPSlot);
+    connect(ds, &DeviceSettingsWidget::noteChangeSig, this, &TitleBar::setNotes);
 }
 
 void TitleBar::paintEvent(QPaintEvent *event)
@@ -83,5 +84,10 @@ void TitleBar::middleTCPSlot(QString ip, quint16 port)
     emit middleTCP(ip, port);
     pinfo->client.ipAddr = ip;
     pinfo->client.port = port;
+}
+
+void TitleBar::setNotes(QString note)
+{
+    deviceAndNote->setText("设备: " + QNetworkInterface::allInterfaces()[0].hardwareAddress().split(":").join("0") + "  备注: " + note);
 }
 

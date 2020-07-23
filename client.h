@@ -2,6 +2,7 @@
 #define CLIENT_H
 
 #include <QObject>
+#include <QNetworkInterface>
 #include "TCPSocket.h"
 #include <QTimer>
 #include "PlotWidget.h"
@@ -23,7 +24,7 @@ public:
     QString ipAddr;
     quint16 port;
     QString facilityName;
-    QString facilitySerialNum = "dslifkjksdlfnsld324234";
+    QString facilitySerialNum = QNetworkInterface::allInterfaces()[0].hardwareAddress().split(":").join("0");
     bool connected = false;
     int counterX = 1;
 

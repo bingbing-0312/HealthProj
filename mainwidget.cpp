@@ -117,7 +117,7 @@ MainWidget::MainWidget(QWidget *parent)
     connect(gs, &GetSerial::receivedAWRRdata, &co2, &CO2Widget::setAWRRNum);
     connect(gs, &GetSerial::receivedINSdata, &co2, &CO2Widget::setINSNum);
 
-    gs->connectPort();
+    //gs->connectPort();
 
     cl.moveToThread(&tcpThread);
     tcpThread.start();
@@ -147,6 +147,8 @@ MainWidget::MainWidget(QWidget *parent)
     connect(&cl, &Client::connectedChangedSig, &spo2Plot, &PlotWidget::connectedChanged);
     connect(&cl, &Client::connectedChangedSig, &bpPlot, &PlotWidget::connectedChanged);
     emit initTCPSig();
+
+    title.ds->gs = gs;
 }
 
 void MainWidget::resizeEvent(QResizeEvent *event)

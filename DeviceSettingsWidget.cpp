@@ -1,19 +1,20 @@
 #include "DeviceSettingsWidget.h"
 
-DeviceSettingsWidget::DeviceSettingsWidget(QWidget *parent) : QWidget(parent)
+DeviceSettingsWidget::DeviceSettingsWidget(QWidget *parent, GetSerial *gs_) : QWidget(parent), gs(gs_)
 {
-    //this->setStyleSheet("background-color: black");
-    //this->resize(500,200);
-
     deviceLayout->addWidget(deviceID);
     deviceLayout->addWidget(deviceIDEdit);
-    deviceLayout->addWidget(deviceIDSet);
     serialPortLayout->addWidget(serialPortLable);
-    serialPortLayout->addWidget(serialPortState);
+    serialPortLayout->addWidget(serialChosen);
+    serialPortLayout->addWidget(serialComGet);
+    serialPortLayout->addWidget(serialComSet);
+    notesLayout->addWidget(notesLabel);
+    notesLayout->addWidget(notesEdit);
+    notesLayout->addWidget(notesButton);
     allLayout->addStretch(2);
     allLayout->addLayout(deviceLayout);
     allLayout->addStretch(1);
-    allLayout->addLayout(badLayout);
+    allLayout->addLayout(notesLayout);
     allLayout->addStretch(1);
     allLayout->addLayout(serialPortLayout);
     allLayout->addStretch(1);
@@ -21,31 +22,43 @@ DeviceSettingsWidget::DeviceSettingsWidget(QWidget *parent) : QWidget(parent)
 
     this->setLayout(allLayout);
 
-    //设置标签文本
-    deviceID->setText("设备ID：");
-    serialPortLable->setText("串口连接状态：");
+    deviceID->setText("设备序列号：");
+    deviceIDEdit->setText(QNetworkInterface::allInterfaces()[0].hardwareAddress().split(":").join("0"));
+    deviceIDEdit->setEnabled(false);
 
-    //设置文本框初始值
-    deviceIDEdit->setText("1");
+    serialPortLable->setText("串口选择：");
+    serialComGet->setText("获取");
+    serialComSet->setText("设置");
 
-    deviceIDSet->setText("设置");
+    notesEdit->setText("001");
+    notesButton->setText("修改");
 
-
-    connect(deviceIDSet, &QPushButton::clicked,
-            this, &DeviceSettingsWidget::setDeviceID);
+    connect(notesButton, &QPushButton::clicked, this, &DeviceSettingsWidget::setNotes);
+    connect(serialComSet, &QPushButton::clicked, this, &DeviceSettingsWidget::setComNum);
+    connect(serialComGet, &QPushButton::clicked, this, &DeviceSettingsWidget::getComs);
 }
 
-void DeviceSettingsWidget::setWindowSize(int w, int h)
+void DeviceSettingsWidget::setComNum()
 {
-    //虽然我不知道这么些的作用，我还是按照已有的TCPSettingsWidget写的
-    this->resize(w, h);
+    gs->close();
+    gs->portName = serialChosen->currentText();
+    QMessageBox::information(NULL, "Success", "成功");
+    gs->connectPort();
 }
 
-void DeviceSettingsWidget::setDeviceID()
+void DeviceSettingsWidget::getComs()
 {
-    QString deviceIDData = deviceIDEdit->text();
-    qDebug() << "设置设备ID";
-    //再跟数据库连接啥的我不会了（上课困死我了 我一直在睡觉我有错）
+    QList<QString> coms = gs->getPortsName();
+    for(int i=0;i<coms.length();i++)
+    {
+        serialChosen->addItem(coms[i]);
+    }
 }
+
+void DeviceSettingsWidget::setNotes()
+{
+    emit noteChangeSig(notesEdit->text());
+}
+
 
 

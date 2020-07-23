@@ -59,11 +59,7 @@ public:
     RESPWidget resp;
     CO2Widget co2;
 
-    GetSerial *gs = new GetSerial("COM30");
-    //QString ipAddr;
-    //quint16 port;
-    //TCPSocket *socket = new TCPSocket;
-    //bool connected = false;
+    GetSerial *gs = new GetSerial();
 
     Client cl;
     QThread tcpThread;

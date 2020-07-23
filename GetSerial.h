@@ -12,7 +12,7 @@ class GetSerial : public QSerialPort
 {
     Q_OBJECT
 public:
-    explicit GetSerial(QString portName_ = "COM31", QObject *parent = nullptr);
+    explicit GetSerial(QString portName_ = "COM1", QObject *parent = nullptr);
     QString portName;
     QList<QString> getPortsName();
     void connectPort();

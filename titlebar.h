@@ -46,6 +46,7 @@ public slots:
     void openINFOWindow();
     void setFullscreen();
     void middleTCPSlot(QString ip, quint16 port);
+    void setNotes(QString note);
 signals:
     void enablefullscreen();
     void disablefullscreen();
