@@ -8,12 +8,16 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QThread>
+#include "patientinfoclient.h"
 
 class PatientInfoWidget : public QWidget
 {
     Q_OBJECT
 public:
     explicit PatientInfoWidget(QWidget *parent = nullptr);
+    QThread thread;
+    patientInfoClient client;
 
 private:
     QWidget *ptopWidget = new QWidget;
@@ -30,8 +34,6 @@ private:
     QLineEdit *ageLineEdit = new QLineEdit;
     QLineEdit *IDnumberLineEdit = new QLineEdit;
     QPushButton *update = new QPushButton;
-    QPushButton *alter = new QPushButton;
-    QPushButton *save = new QPushButton;
 
     QVBoxLayout *pwholeLayout = new QVBoxLayout;
     QHBoxLayout *ptopLayout = new QHBoxLayout;
@@ -40,11 +42,14 @@ private:
     QHBoxLayout *pbottomLayout = new QHBoxLayout;
     QHBoxLayout *pIDnumberLayout = new QHBoxLayout;
 
-private slots:
-    void savetButton_clicked();
-    void alterButton_clicked();
 
+public slots:
+    void on_update_clicked();
+    void getfacilityID(QString id);
+    void receivedData(QString name, QString sex, QString age, QString idNum);
 
+signals:
+    void getinfoSig();
 };
 
 #endif // PATIENTINFOWIDGET_H

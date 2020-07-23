@@ -9,7 +9,7 @@ QList<QString> GetSerial::getPortsName()
     QList<QSerialPortInfo> ports = QSerialPortInfo::availablePorts();
     QList<QSerialPortInfo>::iterator iPort;
     QList<QString> portsName;
-    for(iPort=ports.begin();iPort<=ports.end();iPort++)
+    for(iPort=ports.begin();iPort<ports.end();iPort++)
     {
         portsName.append(iPort->portName());
     }

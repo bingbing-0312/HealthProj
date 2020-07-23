@@ -117,7 +117,7 @@ MainWidget::MainWidget(QWidget *parent)
     connect(gs, &GetSerial::receivedAWRRdata, &co2, &CO2Widget::setAWRRNum);
     connect(gs, &GetSerial::receivedINSdata, &co2, &CO2Widget::setINSNum);
 
-    gs->connectPort();
+    //gs->connectPort();
 
     cl.moveToThread(&tcpThread);
     tcpThread.start();
@@ -128,12 +128,27 @@ MainWidget::MainWidget(QWidget *parent)
     cl.temp = &temp;
     cl.resp = &resp;
     cl.co2 = &co2;
-    cl.ecgiiPlot = &ecgiiPlot;
-    cl.spo2Plot = &spo2Plot;
-    cl.bpPlot = &bpPlot;
-    cl.titlebar = &title;
+
+    connect(&title, &TitleBar::middleTCP, &cl, &Client::setTCPIP);
     connect(this, &MainWidget::initTCPSig, &cl, &Client::initALL);
+    connect(&cl, &Client::facilityIDchanged, title.pinfo, &PatientInfoWidget::getfacilityID);
+
+    qRegisterMetaType<QList<int>>("QList<int>");
+    qRegisterMetaType<QList<int>>("QList<int>&");
+    connect(&ecgiiPlot, &PlotWidget::dataFulledForTCP, &cl, &Client::sendTCPWaves);
+    connect(&spo2Plot, &PlotWidget::dataFulledForTCP, &cl, &Client::sendTCPWaves);
+    connect(&bpPlot, &PlotWidget::dataFulledForTCP, &cl, &Client::sendTCPWaves);
+
+    connect(&cl, &Client::ecgDataSended, &ecgiiPlot, &PlotWidget::dataSendedTCP);
+    connect(&cl, &Client::spo2DataSended, &spo2Plot, &PlotWidget::dataSendedTCP);
+    connect(&cl, &Client::bpDataSended, &bpPlot, &PlotWidget::dataSendedTCP);
+
+    connect(&cl, &Client::connectedChangedSig, &ecgiiPlot, &PlotWidget::connectedChanged);
+    connect(&cl, &Client::connectedChangedSig, &spo2Plot, &PlotWidget::connectedChanged);
+    connect(&cl, &Client::connectedChangedSig, &bpPlot, &PlotWidget::connectedChanged);
     emit initTCPSig();
+
+    title.ds->gs = gs;
 }
 
 void MainWidget::resizeEvent(QResizeEvent *event)

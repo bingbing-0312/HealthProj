@@ -29,6 +29,7 @@ SOURCES += \
     main.cpp \
     mainwidget.cpp \
     nibpwidget.cpp \
+    patientinfoclient.cpp \
     respwidget.cpp \
     spo2widget.cpp \
     stwidget.cpp \
@@ -48,6 +49,7 @@ HEADERS += \
     labelbutton.h \
     mainwidget.h \
     nibpwidget.h \
+    patientinfoclient.h \
     respwidget.h \
     spo2widget.h \
     stwidget.h \
