@@ -30,7 +30,6 @@ private:
     QLineEdit *ageLineEdit = new QLineEdit;
     QLineEdit *IDnumberLineEdit = new QLineEdit;
     QPushButton *update = new QPushButton;
-    QPushButton *alter = new QPushButton;
     QPushButton *save = new QPushButton;
 
     QVBoxLayout *pwholeLayout = new QVBoxLayout;
