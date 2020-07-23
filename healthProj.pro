@@ -22,6 +22,7 @@ SOURCES += \
     PlotWidget.cpp \
     TCPSettingsWidget.cpp \
     TCPSocket.cpp \
+    client.cpp \
     co2widget.cpp \
     hrwidget.cpp \
     labelbutton.cpp \
@@ -41,6 +42,7 @@ HEADERS += \
     PlotWidget.h \
     TCPSettingsWidget.h \
     TCPSocket.h \
+    client.h \
     co2widget.h \
     hrwidget.h \
     labelbutton.h \

@@ -6,6 +6,7 @@
 #include <QLineEdit>
 #include <QLayout>
 #include <QLabel>
+#include <QThread>
 #include "TCPSocket.h"
 
 class TCPSettingsWidget : public QWidget
@@ -28,13 +29,18 @@ public:
 
     TCPSocket *socketForTest = new TCPSocket;
 
+    QThread thread;
+
 
 public slots:
     void setTCPIP();
     void testTCPIP();
+    void successTest();
+    void failTest();
 
 signals:
     void tcpipChanged(QString ip, quint16 port);
+    void testSig(QString ip, quint16 port);
 
 };
 
