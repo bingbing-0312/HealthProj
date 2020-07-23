@@ -13,8 +13,6 @@
 #include "spo2widget.h"
 #include "tempwidget.h"
 #include "tempwidget.h"
-#include "titlebar.h"
-
 class Client : public QObject
 {
     Q_OBJECT
@@ -25,12 +23,9 @@ public:
     QString ipAddr;
     quint16 port;
     QString facilityName;
-    QString facilitySerialNum;
+    QString facilitySerialNum = "dslifkjksdlfnsld324234";
     bool connected = false;
     int counterX = 1;
-    PlotWidget *ecgiiPlot;
-    PlotWidget *spo2Plot;
-    PlotWidget *bpPlot;
 
     HRWidget *hr;
     STWidget *st;
@@ -41,18 +36,20 @@ public:
     RESPWidget *resp;
     CO2Widget *co2;
 
-    TitleBar *titlebar;
-
 
 public slots:
     void initALL();
     void setTCPIP(QString ip, quint16 mport);
     void TCPGetMessage(QByteArray ba);
     void sendTCPOthers();
-    void sendTCPWaves(int flag);
+    void sendTCPWaves(int flag, QList<int>& dataForTCP);
 
 signals:
-
+    void facilityIDchanged(QString id);
+    void ecgDataSended();
+    void spo2DataSended();
+    void bpDataSended();
+    void connectedChangedSig();
 };
 
 #endif // CLIENT_H

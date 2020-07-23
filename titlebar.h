@@ -10,6 +10,7 @@
 #include "DeviceSettingsWidget.h"
 #include "TCPSettingsWidget.h"
 #include "PatientInfoWidget.h"
+#include "client.h"
 
 class TitleBar : public QWidget
 {
@@ -19,7 +20,6 @@ public:
     void paintEvent(QPaintEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
 
-private:
     QHBoxLayout *layout = new QHBoxLayout(this);
 
     QLabel *deviceAndNote = new QLabel(this);
@@ -45,11 +45,11 @@ public slots:
     void openTCPWindow();
     void openINFOWindow();
     void setFullscreen();
-    void middleTCPSlot(QString ip, qint16 port);
+    void middleTCPSlot(QString ip, quint16 port);
 signals:
     void enablefullscreen();
     void disablefullscreen();
-    void middleTCP(QString ip, qint16 port);
+    void middleTCP(QString ip, quint16 port);
 };
 
 #endif // TITLEBAR_H

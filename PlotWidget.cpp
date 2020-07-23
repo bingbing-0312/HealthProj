@@ -74,7 +74,7 @@ void PlotWidget::paintData()
             dis++;
         }
         if(dataForTCP.length() < 200)
-            dataForTCP.append(data.at(s-dis));
+            dataForTCP.append((pix->height() - data.at(s-dis))*(yScale-y0)/pix->height() + y0);
         painter->drawLine(time.at(s-dis), data.at(s-dis),
                           time.at(s), data.at(s));
     }
@@ -90,10 +90,22 @@ void PlotWidget::paintSlot()
         data.clear();
         time.clear();
     }
-    if(dataForTCP.size() >= 200)
+    if(dataForTCP.size() == 200 && emittedFlag == false && connected)
     {
-        emit dataFulledForTCP(plotflag);
+        emit dataFulledForTCP(plotflag, dataForTCP);
+        emittedFlag = true;
     }
     this->update();
+}
+
+void PlotWidget::dataSendedTCP()
+{
+    emittedFlag = false;
+    dataForTCP.clear();
+}
+
+void PlotWidget::connectedChanged()
+{
+    connected = true;
 }
 

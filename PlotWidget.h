@@ -33,6 +33,8 @@ private:
     QPainter *painter; //主painter
     QTimer timer; //重绘定时器
     QPixmap *pix;
+    bool emittedFlag = false;
+    bool connected = false;
 
     int t = 0; //当前时间
     void paintData(); //绘制数据
@@ -40,9 +42,11 @@ private:
 public slots:
     void sendData(double d); //外部获取数据函数
     void paintSlot(); //定时绘制
+    void dataSendedTCP();
+    void connectedChanged();
 
 signals:
-    void dataFulledForTCP(int flag);
+    void dataFulledForTCP(int flag, QList<int>& dataF);
 };
 
 #endif

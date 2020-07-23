@@ -32,7 +32,7 @@ public:
     void resizeEvent(QResizeEvent *event) override;
 
     //注意：由于Qt对象树在销毁时，含有子对象且在栈区的对象，销毁时会把子对象也销毁
-    //     而子对象还会销毁一遍，这样就出错了，会无法退出，因此这里用指针将其放在堆区
+    //     而子对象还会销毁一遍，这样就出错了，会无法退出，因此这里指用针将其放在堆区
     //布局Layout
     QVBoxLayout *splitTitle = new QVBoxLayout;
     QVBoxLayout *leftPlotsLayout = new QVBoxLayout;

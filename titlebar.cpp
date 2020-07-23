@@ -78,8 +78,10 @@ void TitleBar::setFullscreen()
     isfullscreen = !isfullscreen;
 }
 
-void TitleBar::middleTCPSlot(QString ip, qint16 port)
+void TitleBar::middleTCPSlot(QString ip, quint16 port)
 {
     emit middleTCP(ip, port);
+    pinfo->client.ipAddr = ip;
+    pinfo->client.port = port;
 }
 

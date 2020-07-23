@@ -27,7 +27,6 @@ PatientInfoWidget::PatientInfoWidget(QWidget *parent) : QWidget(parent)
     pIDnumberWidget->setLayout(pIDnumberLayout);
 
     pbottomLayout->addWidget(update,0,Qt::AlignRight|Qt::AlignCenter);
-    pbottomLayout->addWidget(save,0,Qt::AlignCenter);
     pbottomWidget->setLayout(pbottomLayout);
 
     this->setLayout(pwholeLayout);
@@ -37,29 +36,33 @@ PatientInfoWidget::PatientInfoWidget(QWidget *parent) : QWidget(parent)
     age->setText("年龄");
     IDnumber->setText("身份证号");
     update->setText("获取远程数据");
-    save->setText("修改远程数据");
     nameLineEdit->setEnabled(false);
     sexLineEdit->setEnabled(false);
     ageLineEdit->setEnabled(false);
     IDnumberLineEdit->setEnabled(false);
-
-    connect(save, &QPushButton::clicked,
-            this, &PatientInfoWidget::savetButton_clicked);
-
+    connect(&client, &patientInfoClient::sendInfo2Widget, this, &PatientInfoWidget::receivedData);
+    connect(this, &PatientInfoWidget::getinfoSig, &client, &patientInfoClient::getinfo);
+    connect(update, &QPushButton::clicked, this, &PatientInfoWidget::on_update_clicked);
+    client.moveToThread(&thread);
+    thread.start();
 }
 
-void PatientInfoWidget::savetButton_clicked()
+void PatientInfoWidget::on_update_clicked()
 {
-    nameLineEdit->setEnabled(false);
-    sexLineEdit->setEnabled(false);
-    ageLineEdit->setEnabled(false);
-    IDnumberLineEdit->setEnabled(false);
+    emit getinfoSig();
 }
 
-void PatientInfoWidget::alterButton_clicked()
+void PatientInfoWidget::getfacilityID(QString id)
 {
-    nameLineEdit->setEnabled(true);
-    sexLineEdit->setEnabled(true);
-    ageLineEdit->setEnabled(true);
-    IDnumberLineEdit->setEnabled(true);
+    client.mdeviceID = id;
+    qDebug() << id;
 }
+
+void PatientInfoWidget::receivedData(QString name, QString sex, QString age, QString idNum)
+{
+    nameLineEdit->setText(name);
+    sexLineEdit->setText(sex);
+    ageLineEdit->setText(age);
+    IDnumberLineEdit->setText(idNum);
+}
+
