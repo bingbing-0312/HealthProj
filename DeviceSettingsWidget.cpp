@@ -30,6 +30,7 @@ DeviceSettingsWidget::DeviceSettingsWidget(QWidget *parent, GetSerial *gs_) : QW
     serialComGet->setText("获取");
     serialComSet->setText("设置");
 
+    notesLabel->setText("备注:");
     notesEdit->setText("001");
     notesButton->setText("修改");
 
