@@ -15,7 +15,7 @@
  - :white_check_mark:全屏按钮
  - :white_check_mark:设备设置窗口
  - :white_check_mark:病人信息窗口
- - :red_circle:管理端程序
+ - :white_check_mark:管理端程序
 
 ## 窗口部件分工
 
