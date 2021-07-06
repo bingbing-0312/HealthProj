@@ -1,4 +1,4 @@
-QT       += core gui serialport
+QT       += core gui serialport network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,13 +16,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    DeviceSettingsWidget.cpp \
     GetSerial.cpp \
+    PatientInfoWidget.cpp \
     PlotWidget.cpp \
+    TCPSettingsWidget.cpp \
+    TCPSocket.cpp \
+    client.cpp \
     co2widget.cpp \
     hrwidget.cpp \
+    labelbutton.cpp \
     main.cpp \
     mainwidget.cpp \
     nibpwidget.cpp \
+    patientinfoclient.cpp \
     respwidget.cpp \
     spo2widget.cpp \
     stwidget.cpp \
@@ -30,12 +37,19 @@ SOURCES += \
     titlebar.cpp
 
 HEADERS += \
+    DeviceSettingsWidget.h \
     GetSerial.h \
+    PatientInfoWidget.h \
     PlotWidget.h \
+    TCPSettingsWidget.h \
+    TCPSocket.h \
+    client.h \
     co2widget.h \
     hrwidget.h \
+    labelbutton.h \
     mainwidget.h \
     nibpwidget.h \
+    patientinfoclient.h \
     respwidget.h \
     spo2widget.h \
     stwidget.h \

@@ -1,11 +1,29 @@
 #include "stwidget.h"
 #include"hrwidget.h"
-#include<QLabel>
-#include<QVBoxLayout>
-#include<QHBoxLayout>
 STWidget::STWidget(QWidget *parent) : QWidget(parent)
 {
+    //ST\PVC内容及样式
+    title->setText("ST");
+    stl1->setText("ST1 -?-");
+    stl2->setText("ST2 -?-");
+    pvcs->setText("PVCs -?-");
+    title->setStyleSheet("color:white;font: 11pt, SimHei;");
+    titleBar->setStyleSheet("background-color:rgb(87, 96, 111);");
+    pixContainer->setPixmap(*pix);
 
+    //布局
+    stlayout->addWidget(titleBar,0);
+    stlayout->addWidget(stl1,1, Qt::AlignHCenter);
+    stlayout->addWidget(stl2,1, Qt::AlignHCenter);
+    stlayout->addWidget(pvcs,1, Qt::AlignHCenter);
+    titleBarLayout->addWidget(title, 0, Qt::AlignLeft);
+    titleBarLayout->addWidget(pixContainer, 0, Qt::AlignRight);
+    titleBar->setLayout(titleBarLayout);
+    titleBar->setFixedHeight(30);
+    stlayout->setMargin(0);
+    stlayout->setSpacing(0);
+
+    this->setLayout(stlayout);
 }
 
 void STWidget::paintEvent(QPaintEvent *event)
@@ -15,59 +33,38 @@ void STWidget::paintEvent(QPaintEvent *event)
     opt.init(this);
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
-    //ST\PVC内容及样式
-    stl1->setText("ST1 -?-");
-    stl1->setStyleSheet("background-color:rgb(0,255,0);");
-    stl2->setText("ST2 -?-");
-    stl2->setStyleSheet("background-color:rgb(0,255,0);");
-    stl3->setText("PVCs -?-");
-    stl3->setStyleSheet("background-color:rgb(0,255,0);");
+}
 
-    //窗体
-    QWidget *strightWidget =new QWidget;
-    strightWidget->setStyleSheet("background-color:rgb(0,255,0);");
+void STWidget::resizeEvent(QResizeEvent *event)
+{
+    Q_UNUSED(event);
+    *pix = pix->scaledToHeight(titleBar->height()-18, Qt::SmoothTransformation);
+    pixContainer->setPixmap(*pix);
+    int w = this->width();
+    int h = this->height();
+    int px20 = w*20/128 > h*20/128? h*20/128 : w*20/128;
+    stl1->setStyleSheet(QString("color:rgb(123, 237, 159);font: %1px, SimHei;").arg(px20));
+    stl2->setStyleSheet(QString("color:rgb(123, 237, 159);font: %1px, SimHei;").arg(px20));
+    pvcs->setStyleSheet(QString("color:rgb(123, 237, 159);font: %1px, SimHei;").arg(px20));
+}
 
-    //布局
-     QVBoxLayout *stlayout = new QVBoxLayout;
-     stlayout->addWidget(strightWidget);
-     stlayout->addWidget(stl1,0,Qt::AlignTop);
-     stlayout->addWidget(stl2,0,Qt::AlignCenter);
-     stlayout->addWidget(stl3,0,Qt::AlignBottom);
+void STWidget::setST1Num(short int st1Num)
+{
+    if(st1Num != -1)
+        stl1->setText(QString("ST1 %1").arg(st1Num));
+    dataForTCPSend1 = st1Num;
+}
 
-     strightWidget->setLayout(stlayout);
+void STWidget::setST2Num(short int st2Num)
+{
+    if(st2Num != -1)
+        stl2->setText(QString("ST2 %1").arg(st2Num));
+    dataForTCPSend2 = st2Num;
+}
 
-     //标题栏
-     hrsttil1->setText("HR");
-     hrsttil1->setStyleSheet("background-color:rgb(255,255,255);");
-     hrsttil2->setText("ST");
-     hrsttil2->setStyleSheet("background-color:rgb(255,255,255);");
-     hrsttil3->setText(" ");
-     hrsttil3->setStyleSheet("background-color:rgb(255,255,255);");
-
-     QWidget *hrsttiWidget =new QWidget;
-     hrsttiWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-
-     //布局
-      QHBoxLayout *hrsttilayout = new QHBoxLayout;
-      hrsttilayout->addWidget(hrsttiWidget);
-      hrsttilayout->addWidget(hrsttil1,0,Qt::AlignLeft);
-      hrsttilayout->addWidget(hrsttil2,0,Qt::AlignCenter);
-      hrsttilayout->addWidget(hrsttil3,0,Qt::AlignRight);
-      hrsttiWidget->setStyleSheet("background-color:rgb(75, 75, 75)");
-      hrsttiWidget->setLayout(hrsttilayout);
-
-
-      //整体布局
-      QWidget *hrstWidget1=new QWidget;
-      QWidget *hrstWidget2=new QWidget;
-      QVBoxLayout *hrstlayout = new QVBoxLayout;
-
-      //标题和内容1:4
-      hrstlayout->setStretchFactor(hrstWidget1,1);
-      hrstlayout->setStretchFactor(hrstWidget2,4);
-
-
-      hrstWidget1->setLayout(hrsttilayout);
-      hrstWidget2->setLayout(hrlayout);
-      hrstWidget2->setLayout(stlayout);
+void STWidget::setPVCNum(short int pvcsNum)
+{
+    if(pvcsNum != -1)
+        pvcs->setText(QString("PVCs %1").arg(pvcsNum));
+    dataForTCPSend3 = pvcsNum;
 }

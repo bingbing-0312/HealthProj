@@ -6,6 +6,7 @@
 #include <QTimer>
 #include <QPixmap>
 #include <QLabel>
+#include <QDebug>
 
 class PlotWidget : public QWidget
 {
@@ -17,11 +18,15 @@ public:
     int xScale = 500; //x范围
     double y0 = -20; //y起始值
     double yScale = 20; //y最大值
+    int plotflag = -1;
     int updateInterval = 10; //采样间隔ms数，需符合奈奎斯特准则
+    int TCPInterval = 0;
     QString text = "";
 
     void paintEvent(QPaintEvent *event) override; //重写重绘函数
     void resizeEvent(QResizeEvent *event) override;
+
+    QList<int> dataForTCP;
 
 private:
     QList<int> data; //数据
@@ -30,6 +35,8 @@ private:
     QPainter *painter; //主painter
     QTimer timer; //重绘定时器
     QPixmap *pix;
+    bool emittedFlag = false;
+    bool connected = false;
 
     int t = 0; //当前时间
     void paintData(); //绘制数据
@@ -37,7 +44,11 @@ private:
 public slots:
     void sendData(double d); //外部获取数据函数
     void paintSlot(); //定时绘制
+    void dataSendedTCP();
+    void connectedChanged();
 
+signals:
+    void dataFulledForTCP(int flag, QList<int>& dataF);
 };
 
 #endif
